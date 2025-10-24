@@ -373,6 +373,12 @@ body {
     gap: 24px;
 }
 
+.poll-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .poll-card {
     background: var(--bg-card);
     border-radius: 16px;
@@ -383,7 +389,7 @@ body {
     position: relative;
 }
 
-.poll-card:hover {
+.poll-card-link:hover .poll-card {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary-light);
