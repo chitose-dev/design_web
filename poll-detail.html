@@ -21,10 +21,8 @@
                 </div>
                 <nav class="nav">
                     <a href="voting-site.html" class="nav-link">ホーム</a>
-                    <a href="#" class="nav-link">カテゴリ</a>
-                    <a href="#" class="nav-link">人気投票</a>
-                    <a href="#" class="nav-link">マイページ</a>
-                    <button class="btn-login">ログイン</button>
+                    <a href="category.html" class="nav-link">カテゴリ</a>
+                    <a href="trending.html" class="nav-link">人気投票</a>
                 </nav>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <span></span>
@@ -92,11 +90,11 @@
                             <div class="result-visual">
                                 <!-- 円グラフ -->
                                 <div class="pie-chart-container">
-                                    <svg class="pie-chart" viewBox="0 0 200 200">
-                                        <circle cx="100" cy="100" r="80" fill="none" stroke="#22c55e" stroke-width="40"
-                                                stroke-dasharray="339 565" transform="rotate(-90 100 100)"/>
-                                        <circle cx="100" cy="100" r="80" fill="none" stroke="#ef4444" stroke-width="40"
-                                                stroke-dasharray="226 565" stroke-dashoffset="-339" transform="rotate(-90 100 100)"/>
+                                    <svg class="pie-chart" viewBox="0 0 220 220">
+                                        <circle cx="110" cy="110" r="80" fill="none" stroke="#22c55e" stroke-width="40"
+                                                stroke-dasharray="339 565" transform="rotate(-90 110 110)"/>
+                                        <circle cx="110" cy="110" r="80" fill="none" stroke="#ef4444" stroke-width="40"
+                                                stroke-dasharray="226 565" stroke-dashoffset="-339" transform="rotate(-90 110 110)"/>
                                     </svg>
                                     <div class="pie-center">
                                         <div class="pie-percentage">60%</div>
@@ -182,10 +180,54 @@
 
                         <!-- コメント投稿フォーム -->
                         <div class="comment-form-card">
-                            <div class="login-required">
-                                <p>💬 コメントを投稿するにはログインが必要です</p>
-                                <button class="btn-login-comment">ログインする</button>
-                            </div>
+                            <h3 class="comment-form-title">💬 コメントを投稿</h3>
+                            <form class="comment-form" id="commentForm">
+                                <!-- ニックネームとメールアドレス -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="nickname" class="form-label">ニックネーム <span class="required">*</span></label>
+                                        <input type="text" id="nickname" class="form-input" placeholder="例：山田太郎" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">メールアドレス <span class="required">*</span></label>
+                                        <input type="email" id="email" class="form-input" placeholder="example@email.com" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- 賛成・反対の選択 -->
+                                <div class="form-group">
+                                    <label class="form-label">あなたの立場 <span class="required">*</span></label>
+                                    <div class="stance-selector">
+                                        <button type="button" class="stance-btn stance-btn-yes" data-stance="yes">
+                                            <span class="stance-icon">👍</span>
+                                            <span class="stance-text">継続すべき</span>
+                                        </button>
+                                        <button type="button" class="stance-btn stance-btn-no" data-stance="no">
+                                            <span class="stance-icon">👎</span>
+                                            <span class="stance-text">廃止すべき</span>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="stance" name="stance" required>
+                                </div>
+                                
+                                <!-- コメント内容 -->
+                                <div class="form-group">
+                                    <label for="commentText" class="form-label">コメント <span class="required">*</span></label>
+                                    <textarea id="commentText" class="form-textarea" rows="5" placeholder="あなたの意見を詳しく教えてください...（200文字以内）" maxlength="200" required></textarea>
+                                    <div class="char-count">
+                                        <span id="charCount">0</span> / 200文字
+                                    </div>
+                                </div>
+                                
+                                <!-- 送信ボタン -->
+                                <button type="submit" class="btn-submit-comment">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                    コメントを投稿
+                                </button>
+                            </form>
                         </div>
 
                         <!-- コメント一覧 -->
