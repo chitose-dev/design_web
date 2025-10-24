@@ -146,6 +146,19 @@
     box-shadow: 0 12px 24px rgba(34, 197, 94, 0.3);
 }
 
+/* 投票後の選択状態 */
+.vote-btn-yes.selected {
+    background: var(--yes-color);
+    border-color: var(--yes-hover);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+}
+
+.vote-btn-yes.selected .vote-icon,
+.vote-btn-yes.selected .vote-label,
+.vote-btn-yes.selected .vote-sublabel {
+    color: white;
+}
+
 .vote-btn-no {
     border-color: var(--no-color);
     background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
@@ -155,6 +168,25 @@
     background: var(--no-color);
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
+}
+
+/* 投票後の選択状態 */
+.vote-btn-no.selected {
+    background: var(--no-color);
+    border-color: var(--no-hover);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+.vote-btn-no.selected .vote-icon,
+.vote-btn-no.selected .vote-label,
+.vote-btn-no.selected .vote-sublabel {
+    color: white;
+}
+
+/* 投票済みの場合は選択されていない方を薄く表示 */
+body.voted .vote-btn:not(.selected) {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .vote-btn:hover .vote-icon,
@@ -233,6 +265,9 @@
     position: relative;
     width: 280px;
     height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pie-chart {
@@ -843,8 +878,44 @@
         font-size: 24px;
     }
     
+    /* スマホで投票ボタンを横並びコンパクトに */
     .vote-buttons {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .vote-btn {
+        padding: 20px 12px;
+    }
+    
+    .vote-icon {
+        font-size: 32px;
+    }
+    
+    .vote-label {
+        font-size: 15px;
+    }
+    
+    .vote-sublabel {
+        font-size: 12px;
+    }
+    
+    /* 結果バーをコンパクトに */
+    .result-item {
+        padding: 16px;
+    }
+    
+    .result-bar-container {
+        height: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .result-percentage {
+        font-size: 20px;
+    }
+    
+    .result-count {
+        font-size: 13px;
     }
     
     .comments-section {
