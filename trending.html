@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人気投票 - みんなの投票</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="trending.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="voting-site.html" style="text-decoration: none; color: inherit;">
+                        <h1>みんなの投票</h1>
+                        <span class="logo-subtitle">2択アンケートプラットフォーム</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <a href="voting-site.html" class="nav-link">ホーム</a>
+                    <a href="category.html" class="nav-link">カテゴリ</a>
+                    <a href="trending.html" class="nav-link active">人気投票</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="voting-site.html" class="mobile-menu-link">ホーム</a>
+        <a href="category.html" class="mobile-menu-link">カテゴリ</a>
+        <a href="trending.html" class="mobile-menu-link active">人気投票</a>
+    </div>
+
+    <!-- ページヘッダー -->
+    <section class="page-header trending-header">
+        <div class="container">
+            <h1 class="page-title">🔥 人気投票ランキング</h1>
+            <p class="page-subtitle">今最も注目されている投票をチェック</p>
+        </div>
+    </section>
+
+    <!-- フィルターバー -->
+    <section class="filter-bar">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-period="today">今日</button>
+                <button class="filter-tab" data-period="week">週間</button>
+                <button class="filter-tab" data-period="month">月間</button>
+                <button class="filter-tab" data-period="all">全期間</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <!-- トップ3特別表示 -->
+            <section class="top-three">
+                <h2 class="section-title">👑 TOP 3</h2>
+                
+                <div class="podium">
+                    <!-- 2位 -->
+                    <a href="poll-detail.html" class="podium-item podium-second">
+                        <div class="podium-rank">2</div>
+                        <div class="podium-medal">🥈</div>
+                        <div class="podium-content">
+                            <span class="podium-category category-tech">テクノロジー</span>
+                            <h3 class="podium-title">AIによる自動運転車の公道走行を全面解禁すべきか？</h3>
+                            <div class="podium-stats">
+                                <span>📊 45,234票</span>
+                                <span>💬 2,891件</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 1位 -->
+                    <a href="poll-detail.html" class="podium-item podium-first">
+                        <div class="podium-rank">1</div>
+                        <div class="podium-medal">🥇</div>
+                        <div class="podium-content">
+                            <span class="podium-category category-lifestyle">ライフスタイル</span>
+                            <h3 class="podium-title">リモートワークとオフィスワーク、どちらが好きですか？</h3>
+                            <div class="podium-stats">
+                                <span>📊 78,456票</span>
+                                <span>💬 4,523件</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 3位 -->
+                    <a href="poll-detail.html" class="podium-item podium-third">
+                        <div class="podium-rank">3</div>
+                        <div class="podium-medal">🥉</div>
+                        <div class="podium-content">
+                            <span class="podium-category category-society">社会</span>
+                            <h3 class="podium-title">週休3日制の導入に賛成ですか？</h3>
+                            <div class="podium-stats">
+                                <span>📊 32,891票</span>
+                                <span>💬 1,765件</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- ランキングリスト -->
+            <section class="ranking-section">
+                <h2 class="section-title">📊 4位以降</h2>
+                
+                <div class="ranking-list">
+                    <!-- 4位 -->
+                    <a href="poll-detail.html" class="ranking-item">
+                        <div class="ranking-number">4</div>
+                        <div class="ranking-content">
+                            <div class="ranking-header">
+                                <span class="poll-category">政治</span>
+                                <span class="poll-time">3時間前</span>
+                            </div>
+                            <h3 class="ranking-title">消費税の軽減税率制度は継続すべきか？</h3>
+                            <div class="poll-stats">
+                                <div class="stat">
+                                    <span class="stat-icon">📊</span>
+                                    <span class="stat-text">28,234票</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">💬</span>
+                                    <span class="stat-text">1,456件</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">🔥</span>
+                                    <span class="stat-text trending-up">↑ 234%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 5位 -->
+                    <a href="poll-detail.html" class="ranking-item">
+                        <div class="ranking-number">5</div>
+                        <div class="ranking-content">
+                            <div class="ranking-header">
+                                <span class="poll-category category-entertainment">エンタメ</span>
+                                <span class="poll-time">5時間前</span>
+                            </div>
+                            <h3 class="ranking-title">映画は映画館で観る派？配信サービスで観る派？</h3>
+                            <div class="poll-stats">
+                                <div class="stat">
+                                    <span class="stat-icon">📊</span>
+                                    <span class="stat-text">25,876票</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">💬</span>
+                                    <span class="stat-text">1,234件</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">🔥</span>
+                                    <span class="stat-text trending-up">↑ 189%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 6位 -->
+                    <a href="poll-detail.html" class="ranking-item">
+                        <div class="ranking-number">6</div>
+                        <div class="ranking-content">
+                            <div class="ranking-header">
+                                <span class="poll-category category-economy">経済</span>
+                                <span class="poll-time">8時間前</span>
+                            </div>
+                            <h3 class="ranking-title">最低賃金を全国一律1,500円に引き上げるべきか？</h3>
+                            <div class="poll-stats">
+                                <div class="stat">
+                                    <span class="stat-icon">📊</span>
+                                    <span class="stat-text">23,567票</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">💬</span>
+                                    <span class="stat-text">987件</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">🔥</span>
+                                    <span class="stat-text trending-up">↑ 156%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 7位 -->
+                    <a href="poll-detail.html" class="ranking-item">
+                        <div class="ranking-number">7</div>
+                        <div class="ranking-content">
+                            <div class="ranking-header">
+                                <span class="poll-category category-sports">スポーツ</span>
+                                <span class="poll-time">10時間前</span>
+                            </div>
+                            <h3 class="ranking-title">日本のプロ野球にDH制を統一すべきか？</h3>
+                            <div class="poll-stats">
+                                <div class="stat">
+                                    <span class="stat-icon">📊</span>
+                                    <span class="stat-text">19,234票</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">💬</span>
+                                    <span class="stat-text">756件</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">🔥</span>
+                                    <span class="stat-text trending-up">↑ 142%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 8-10位も同様に追加 -->
+                    <a href="poll-detail.html" class="ranking-item">
+                        <div class="ranking-number">8</div>
+                        <div class="ranking-content">
+                            <div class="ranking-header">
+                                <span class="poll-category category-tech">テクノロジー</span>
+                                <span class="poll-time">12時間前</span>
+                            </div>
+                            <h3 class="ranking-title">スマホ決済とクレジットカード、どちらをメインに使う？</h3>
+                            <div class="poll-stats">
+                                <div class="stat">
+                                    <span class="stat-icon">📊</span>
+                                    <span class="stat-text">17,892票</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">💬</span>
+                                    <span class="stat-text">623件</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-icon">🔥</span>
+                                    <span class="stat-text trending-stable">→ 98%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">みんなの投票</h3>
+                    <p class="footer-text">みんなの意見を2択で可視化する<br>新しい投票プラットフォーム</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="voting-site.html">投票を探す</a></li>
+                        <li><a href="trending.html">人気の投票</a></li>
+                        <li><a href="category.html">カテゴリ一覧</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サポート</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">運営会社</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 みんなの投票. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="trending.js"></script>
+</body>
+</html>
