@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (tickerContent) {
         // ティッカーコンテンツを複製して無限スクロールを実現
-        const tickerClone = tickerContent.cloneNode(true);
-        tickerContent.parentNode.appendChild(tickerClone);
+        const tickerHTML = tickerContent.innerHTML;
+        // 同じ内容を3回繰り返して滑らかな無限スクロールを実現
+        tickerContent.innerHTML = tickerHTML + tickerHTML + tickerHTML;
     }
 });
 
