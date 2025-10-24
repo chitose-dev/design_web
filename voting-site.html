@@ -43,16 +43,123 @@
         <button class="btn-login-mobile">ログイン</button>
     </div>
 
-    <!-- ヒーローセクション -->
-    <section class="hero">
+    <!-- ティッカー（スクロールメッセージ） -->
+    <div class="ticker-section">
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item">
+                    <span class="ticker-label hot">🔥 HOT</span>
+                    毎秒12件の質問が更新！
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">📊</span>
+                    新着：消費税の軽減税率制度は継続すべきか
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    1,234票
+                    <span class="ticker-label yes">賛成</span>
+                    60%
+                    <span class="ticker-label no">反対</span>
+                    40%
+                    <span class="ticker-label comments">💬</span>
+                    89件
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">📈</span>
+                    トレンド：週休3日制の導入に賛成ですか？
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    5,432票
+                    <span class="ticker-label yes">賛成</span>
+                    78%
+                    <span class="ticker-label no">反対</span>
+                    22%
+                    <span class="ticker-label comments">💬</span>
+                    412件
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">⚡</span>
+                    急上昇：AIによる自動運転車の公道走行を全面解禁すべきか
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    3,567票
+                    <span class="ticker-label yes">賛成</span>
+                    45%
+                    <span class="ticker-label no">反対</span>
+                    55%
+                    <span class="ticker-label comments">💬</span>
+                    234件
+                </span>
+                <span class="ticker-separator">●</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 検索・フィルターセクション -->
+    <section class="search-filter-section">
         <div class="container">
-            <h2 class="hero-title">あなたの意見を<br>2択で届けよう</h2>
-            <p class="hero-subtitle">賛成？反対？あなたの声が社会を変える</p>
-            <button class="btn-primary btn-large">投票を作成依頼する</button>
+            <div class="search-filter-wrapper">
+                <!-- 検索ボックス -->
+                <div class="search-box">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" class="search-input" placeholder="投票を検索... （例：消費税、AI、働き方）">
+                    <button class="search-btn">検索</button>
+                </div>
+                
+                <!-- クイックフィルター -->
+                <div class="quick-filters">
+                    <button class="quick-filter active" data-filter="all">
+                        <span class="filter-icon">📊</span>
+                        すべて
+                    </button>
+                    <button class="quick-filter" data-filter="trending">
+                        <span class="filter-icon">🔥</span>
+                        トレンド
+                    </button>
+                    <button class="quick-filter" data-filter="new">
+                        <span class="filter-icon">⭐</span>
+                        新着
+                    </button>
+                    <button class="quick-filter" data-filter="hot-debate">
+                        <span class="filter-icon">💬</span>
+                        議論活発
+                    </button>
+                </div>
+                
+                <!-- 統計情報 -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalPolls">2,847</span>
+                        <span class="stat-label">投票</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalVotes">1.2M</span>
+                        <span class="stat-label">総投票数</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="activeUsers">8,432</span>
+                        <span class="stat-label">オンライン</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- カテゴリナビ -->
+    <!-- カテゴリナビゲーション -->
     <section class="category-nav">
         <div class="container">
             <div class="category-tabs">
