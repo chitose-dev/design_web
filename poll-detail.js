@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.style.boxShadow = '';
                 alert(`「${voteLabel}」に投票しました！\n結果が更新されました。`);
                 
+                // 選択状態を追加
+                this.classList.add('selected');
+                
                 // 結果セクションまでスクロール
                 const resultSection = document.querySelector('.result-section');
                 if (resultSection) {
@@ -46,12 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 投票済みフラグ
                 document.body.classList.add('voted');
-                
-                // ボタンを無効化
-                voteButtons.forEach(btn => {
-                    btn.style.opacity = '0.6';
-                    btn.style.cursor = 'not-allowed';
-                });
                 
                 // デモ用：結果を更新（実際はバックエンドから取得）
                 updateResults(isYes);
@@ -114,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             piePercentage.textContent = yesPercentage + '%';
         }
         
-        // SVG円グラフの更新（実際のプロジェクトではもっと洗練された方法を使用）
+        // SVG円グラフの更新
         const circumference = 2 * Math.PI * 90;
         const yesLength = (yesPercentage / 100) * circumference;
         const noLength = circumference - yesLength;
