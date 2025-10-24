@@ -271,6 +271,74 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========================================
+    // コメントフォーム処理
+    // ========================================
+    const commentForm = document.getElementById('commentForm');
+    const stanceBtns = document.querySelectorAll('.stance-btn');
+    const stanceInput = document.getElementById('stance');
+    const commentTextarea = document.getElementById('commentText');
+    const charCount = document.getElementById('charCount');
+    
+    // 立場選択ボタン
+    stanceBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // すべてのボタンからselectedを削除
+            stanceBtns.forEach(b => b.classList.remove('selected'));
+            // クリックされたボタンにselectedを追加
+            this.classList.add('selected');
+            // hidden inputに値を設定
+            stanceInput.value = this.getAttribute('data-stance');
+            
+            // アニメーション
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+        });
+    });
+    
+    // 文字数カウント
+    if (commentTextarea && charCount) {
+        commentTextarea.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+    }
+    
+    // フォーム送信
+    if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nickname = document.getElementById('nickname').value;
+            const email = document.getElementById('email').value;
+            const stance = stanceInput.value;
+            const comment = commentTextarea.value;
+            
+            // 立場が選択されているかチェック
+            if (!stance) {
+                alert('賛成か反対のどちらかを選択してください。');
+                return;
+            }
+            
+            // バックエンド実装後にAJAXリクエストを送信
+            console.log('コメント投稿:', {
+                nickname,
+                email,
+                stance,
+                comment
+            });
+            
+            // デモ用：投稿成功メッセージ
+            alert('コメントを投稿しました！\n（実際のサイトでは、投稿後にコメント一覧に表示されます）');
+            
+            // フォームをリセット
+            commentForm.reset();
+            stanceBtns.forEach(b => b.classList.remove('selected'));
+            charCount.textContent = '0';
+        });
+    }
+    
+    // ========================================
     // さらに読み込むボタン
     // ========================================
     const loadMoreBtn = document.querySelector('.load-more-btn');
