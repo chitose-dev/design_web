@@ -526,6 +526,18 @@ body {
     color: white;
 }
 
+/* 投票後の選択状態 */
+.poll-option-yes.selected {
+    background: var(--yes-color);
+    border-color: var(--yes-hover);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.poll-option-yes.selected .option-label,
+.poll-option-yes.selected .option-icon {
+    color: white;
+}
+
 .poll-option-no {
     border-color: var(--no-color);
     background: rgba(239, 68, 68, 0.05);
@@ -540,6 +552,24 @@ body {
 .poll-option-no:hover .option-label,
 .poll-option-no:hover .option-icon {
     color: white;
+}
+
+/* 投票後の選択状態 */
+.poll-option-no.selected {
+    background: var(--no-color);
+    border-color: var(--no-hover);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.poll-option-no.selected .option-label,
+.poll-option-no.selected .option-icon {
+    color: white;
+}
+
+/* 投票済みの場合は選択されていない方を薄く表示 */
+.poll-card.voted .poll-option:not(.selected) {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .option-label {
@@ -704,13 +734,37 @@ body {
         gap: 30px;
     }
     
+    /* スマホでの投票オプションを横並びコンパクトに */
     .poll-options {
-        flex-direction: column;
+        flex-direction: row;
+        gap: 8px;
     }
     
     .poll-option {
-        flex-direction: row;
-        justify-content: space-between;
+        padding: 12px 8px;
+        gap: 6px;
+    }
+    
+    .option-icon {
+        font-size: 20px;
+    }
+    
+    .option-label {
+        font-size: 13px;
+    }
+    
+    /* 統計情報をコンパクトに */
+    .poll-stats {
+        padding-top: 12px;
+        gap: 16px;
+    }
+    
+    .stat {
+        font-size: 13px;
+    }
+    
+    .stat-icon {
+        font-size: 14px;
     }
 }
 
