@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カテゴリ一覧 - みんなの投票</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="category.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="voting-site.html" style="text-decoration: none; color: inherit;">
+                        <h1>みんなの投票</h1>
+                        <span class="logo-subtitle">2択アンケートプラットフォーム</span>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <a href="voting-site.html" class="nav-link">ホーム</a>
+                    <a href="category.html" class="nav-link active">カテゴリ</a>
+                    <a href="trending.html" class="nav-link">人気投票</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="voting-site.html" class="mobile-menu-link">ホーム</a>
+        <a href="category.html" class="mobile-menu-link active">カテゴリ</a>
+        <a href="trending.html" class="mobile-menu-link">人気投票</a>
+    </div>
+
+    <!-- ティッカー（スクロールメッセージ） -->
+    <div class="ticker-section">
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item">
+                    <span class="ticker-label hot">🔥 HOT</span>
+                    毎秒12件の質問が更新！
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">📊</span>
+                    新着：消費税の軽減税率制度は継続すべきか
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    1,234票
+                    <span class="ticker-label yes">賛成</span>
+                    60%
+                    <span class="ticker-label no">反対</span>
+                    40%
+                    <span class="ticker-label comments">💬</span>
+                    89件
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">📈</span>
+                    トレンド：週休3日制の導入に賛成ですか？
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    5,432票
+                    <span class="ticker-label yes">賛成</span>
+                    78%
+                    <span class="ticker-label no">反対</span>
+                    22%
+                    <span class="ticker-label comments">💬</span>
+                    412件
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-icon">⚡</span>
+                    急上昇：AIによる自動運転車の公道走行を全面解禁すべきか
+                </span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">
+                    <span class="ticker-label votes">投票数</span>
+                    3,567票
+                    <span class="ticker-label yes">賛成</span>
+                    45%
+                    <span class="ticker-label no">反対</span>
+                    55%
+                    <span class="ticker-label comments">💬</span>
+                    234件
+                </span>
+                <span class="ticker-separator">●</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ページヘッダー -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">📂 カテゴリ一覧</h1>
+            <p class="page-subtitle">興味のあるカテゴリから投票を探そう</p>
+        </div>
+    </section>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <!-- カテゴリグリッド -->
+            <div class="category-grid">
+                <!-- 政治 -->
+                <a href="category-detail.html?cat=politics" class="category-card category-politics">
+                    <div class="category-icon">🏛️</div>
+                    <h2 class="category-name">政治</h2>
+                    <p class="category-description">政策、選挙、行政に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">342件</span>
+                        <span class="category-votes">128K票</span>
+                    </div>
+                </a>
+
+                <!-- 経済 -->
+                <a href="category-detail.html?cat=economy" class="category-card category-economy">
+                    <div class="category-icon">💰</div>
+                    <h2 class="category-name">経済</h2>
+                    <p class="category-description">税制、雇用、景気に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">289件</span>
+                        <span class="category-votes">95K票</span>
+                    </div>
+                </a>
+
+                <!-- 社会 -->
+                <a href="category-detail.html?cat=society" class="category-card category-society">
+                    <div class="category-icon">🌍</div>
+                    <h2 class="category-name">社会</h2>
+                    <p class="category-description">教育、福祉、環境に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">456件</span>
+                        <span class="category-votes">187K票</span>
+                    </div>
+                </a>
+
+                <!-- テクノロジー -->
+                <a href="category-detail.html?cat=technology" class="category-card category-technology">
+                    <div class="category-icon">💻</div>
+                    <h2 class="category-name">テクノロジー</h2>
+                    <p class="category-description">AI、IT、科学技術に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">398件</span>
+                        <span class="category-votes">215K票</span>
+                    </div>
+                </a>
+
+                <!-- エンタメ -->
+                <a href="category-detail.html?cat=entertainment" class="category-card category-entertainment">
+                    <div class="category-icon">🎬</div>
+                    <h2 class="category-name">エンタメ</h2>
+                    <p class="category-description">映画、音楽、ゲームに関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">521件</span>
+                        <span class="category-votes">304K票</span>
+                    </div>
+                </a>
+
+                <!-- スポーツ -->
+                <a href="category-detail.html?cat=sports" class="category-card category-sports">
+                    <div class="category-icon">⚽</div>
+                    <h2 class="category-name">スポーツ</h2>
+                    <p class="category-description">野球、サッカー、各種競技に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">267件</span>
+                        <span class="category-votes">142K票</span>
+                    </div>
+                </a>
+
+                <!-- ライフスタイル -->
+                <a href="category-detail.html?cat=lifestyle" class="category-card category-lifestyle">
+                    <div class="category-icon">🏡</div>
+                    <h2 class="category-name">ライフスタイル</h2>
+                    <p class="category-description">働き方、暮らし、趣味に関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">634件</span>
+                        <span class="category-votes">421K票</span>
+                    </div>
+                </a>
+
+                <!-- 健康 -->
+                <a href="category-detail.html?cat=health" class="category-card category-health">
+                    <div class="category-icon">🏥</div>
+                    <h2 class="category-name">健康</h2>
+                    <p class="category-description">医療、健康、ウェルネスに関する投票</p>
+                    <div class="category-stats">
+                        <span class="category-count">178件</span>
+                        <span class="category-votes">89K票</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">みんなの投票</h3>
+                    <p class="footer-text">みんなの意見を2択で可視化する<br>新しい投票プラットフォーム</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="voting-site.html">投票を探す</a></li>
+                        <li><a href="trending.html">人気の投票</a></li>
+                        <li><a href="category.html">カテゴリ一覧</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サポート</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">運営会社</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 みんなの投票. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
