@@ -62,12 +62,16 @@ pollCards.forEach(card => {
 const pollOptions = document.querySelectorAll('.poll-option');
 
 pollOptions.forEach(option => {
-    option.addEventListener('click', function() {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         // 投票カードを見つける
         const pollCard = this.closest('.poll-card');
+        const pollCardLink = this.closest('.poll-card-link');
         
         // すでに投票済みかチェック
-        if (pollCard.classList.contains('voted')) {
+        if (pollCard && pollCard.classList.contains('voted')) {
             alert('すでに投票済みです');
             return;
         }
@@ -88,13 +92,16 @@ pollOptions.forEach(option => {
         this.style.boxShadow = '0 0 0 4px rgba(0, 102, 204, 0.3)';
         setTimeout(() => {
             this.style.boxShadow = '';
-            // 投票完了後、詳細ページへ遷移（デモ用はアラート）
-            alert(`「${optionLabel}」に投票しました！`);
-            // window.location.href = 'poll-detail.html';
+            // 投票完了後、詳細ページへ遷移
+            if (pollCardLink) {
+                window.location.href = pollCardLink.href;
+            }
         }, 500);
         
         // 投票済みフラグを立てる
-        pollCard.classList.add('voted');
+        if (pollCard) {
+            pollCard.classList.add('voted');
+        }
     });
 });
 
