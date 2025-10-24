@@ -78,6 +78,7 @@ pollOptions.forEach(option => {
         
         // 選択された選択肢を取得
         const optionLabel = this.querySelector('.option-label').textContent;
+        const isYes = this.classList.contains('poll-option-yes');
         
         // アニメーション効果
         this.style.transform = 'scale(1.1)';
@@ -86,22 +87,29 @@ pollOptions.forEach(option => {
         }, 100);
         
         // 投票処理（バックエンド実装後にAJAXリクエストを追加）
-        console.log('投票:', optionLabel);
+        console.log('投票:', optionLabel, isYes ? 'YES' : 'NO');
         
         // 視覚的フィードバック
-        this.style.boxShadow = '0 0 0 4px rgba(0, 102, 204, 0.3)';
+        this.style.boxShadow = isYes 
+            ? '0 0 0 4px rgba(34, 197, 94, 0.4)' 
+            : '0 0 0 4px rgba(239, 68, 68, 0.4)';
+        
         setTimeout(() => {
             this.style.boxShadow = '';
+            
+            // 選択状態を追加
+            this.classList.add('selected');
+            
+            // 投票済みフラグを立てる
+            if (pollCard) {
+                pollCard.classList.add('voted');
+            }
+            
             // 投票完了後、詳細ページへ遷移
             if (pollCardLink) {
                 window.location.href = pollCardLink.href;
             }
         }, 500);
-        
-        // 投票済みフラグを立てる
-        if (pollCard) {
-            pollCard.classList.add('voted');
-        }
     });
 });
 
