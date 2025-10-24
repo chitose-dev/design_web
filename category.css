@@ -1,0 +1,221 @@
+/* ========================================
+   カテゴリページ専用スタイル
+   ======================================== */
+
+/* ページヘッダー */
+.page-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 2px solid rgba(0, 102, 204, 0.3);
+}
+
+.page-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 12px;
+    font-family: var(--font-accent);
+    letter-spacing: -1px;
+}
+
+.page-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+/* カテゴリグリッド */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.category-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.category-card:hover::before {
+    transform: scaleX(1);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+.category-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.category-name {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
+}
+
+.category-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.category-stats {
+    display: flex;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+    justify-content: center;
+}
+
+.category-count,
+.category-votes {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.category-count::before {
+    content: '📊 ';
+}
+
+.category-votes::before {
+    content: '🗳️ ';
+}
+
+/* カテゴリ別カラー */
+.category-politics:hover {
+    border-color: #0066cc;
+}
+
+.category-politics:hover::before {
+    background: linear-gradient(90deg, #0066cc 0%, #3385d6 100%);
+}
+
+.category-economy:hover {
+    border-color: #f59e0b;
+}
+
+.category-economy:hover::before {
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+.category-society:hover {
+    border-color: #10b981;
+}
+
+.category-society:hover::before {
+    background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+}
+
+.category-technology:hover {
+    border-color: #8b5cf6;
+}
+
+.category-technology:hover::before {
+    background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+}
+
+.category-entertainment:hover {
+    border-color: #f43f5e;
+}
+
+.category-entertainment:hover::before {
+    background: linear-gradient(90deg, #f43f5e 0%, #fb7185 100%);
+}
+
+.category-sports:hover {
+    border-color: #06b6d4;
+}
+
+.category-sports:hover::before {
+    background: linear-gradient(90deg, #06b6d4 0%, #22d3ee 100%);
+}
+
+.category-lifestyle:hover {
+    border-color: #ec4899;
+}
+
+.category-lifestyle:hover::before {
+    background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
+}
+
+.category-health:hover {
+    border-color: #ef4444;
+}
+
+.category-health:hover::before {
+    background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 40px 0;
+    }
+    
+    .page-title {
+        font-size: 32px;
+    }
+    
+    .page-subtitle {
+        font-size: 16px;
+    }
+    
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+    
+    .category-card {
+        padding: 24px 20px;
+    }
+    
+    .category-icon {
+        font-size: 48px;
+    }
+    
+    .category-name {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
