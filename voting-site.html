@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>みんなの投票 - 2択で答える意見プラットフォーム</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>みんなの投票</h1>
+                    <span class="logo-subtitle">2択アンケートプラットフォーム</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link active">ホーム</a>
+                    <a href="#" class="nav-link">カテゴリ</a>
+                    <a href="#" class="nav-link">人気投票</a>
+                    <a href="#" class="nav-link">マイページ</a>
+                    <button class="btn-login">ログイン</button>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="mobile-menu-link active">ホーム</a>
+        <a href="#" class="mobile-menu-link">カテゴリ</a>
+        <a href="#" class="mobile-menu-link">人気投票</a>
+        <a href="#" class="mobile-menu-link">マイページ</a>
+        <button class="btn-login-mobile">ログイン</button>
+    </div>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">あなたの意見を<br>2択で届けよう</h2>
+            <p class="hero-subtitle">賛成？反対？あなたの声が社会を変える</p>
+            <button class="btn-primary btn-large">投票を作成依頼する</button>
+        </div>
+    </section>
+
+    <!-- カテゴリナビ -->
+    <section class="category-nav">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active">すべて</button>
+                <button class="category-tab">政治</button>
+                <button class="category-tab">経済</button>
+                <button class="category-tab">社会</button>
+                <button class="category-tab">テクノロジー</button>
+                <button class="category-tab">エンタメ</button>
+                <button class="category-tab">スポーツ</button>
+                <button class="category-tab">ライフスタイル</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <!-- 最新投票セクション -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">🔥 最新の投票</h2>
+                    <a href="#" class="see-all">すべて見る →</a>
+                </div>
+                <div class="poll-grid">
+                    <!-- 投票カード1 -->
+                    <div class="poll-card">
+                        <div class="poll-card-header">
+                            <span class="poll-category">政治</span>
+                            <span class="poll-time">5分前</span>
+                        </div>
+                        <h3 class="poll-title">消費税の軽減税率制度は継続すべきか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">継続すべき</span>
+                                <span class="option-icon">👍</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">廃止すべき</span>
+                                <span class="option-icon">👎</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">1,234票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">89件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 投票カード2 -->
+                    <div class="poll-card">
+                        <div class="poll-card-header">
+                            <span class="poll-category category-tech">テクノロジー</span>
+                            <span class="poll-time">1時間前</span>
+                        </div>
+                        <h3 class="poll-title">AIによる自動運転車の公道走行を全面解禁すべきか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">賛成</span>
+                                <span class="option-icon">✓</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">反対</span>
+                                <span class="option-icon">✗</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">3,567票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">234件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 投票カード3 -->
+                    <div class="poll-card">
+                        <div class="poll-card-header">
+                            <span class="poll-category category-society">社会</span>
+                            <span class="poll-time">3時間前</span>
+                        </div>
+                        <h3 class="poll-title">週休3日制の導入に賛成ですか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">賛成</span>
+                                <span class="option-icon">😊</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">反対</span>
+                                <span class="option-icon">😐</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">5,432票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">412件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 投票カード4 -->
+                    <div class="poll-card">
+                        <div class="poll-card-header">
+                            <span class="poll-category category-economy">経済</span>
+                            <span class="poll-time">5時間前</span>
+                        </div>
+                        <h3 class="poll-title">最低賃金を全国一律1,500円に引き上げるべきか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">引き上げるべき</span>
+                                <span class="option-icon">💰</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">現状維持</span>
+                                <span class="option-icon">📉</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">2,891票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">178件</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 人気投票セクション -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">⭐ 人気の投票</h2>
+                    <a href="#" class="see-all">すべて見る →</a>
+                </div>
+                <div class="poll-grid">
+                    <!-- 人気投票カード1 -->
+                    <div class="poll-card poll-card-popular">
+                        <div class="popular-badge">🔥 トレンド</div>
+                        <div class="poll-card-header">
+                            <span class="poll-category category-lifestyle">ライフスタイル</span>
+                            <span class="poll-time">1日前</span>
+                        </div>
+                        <h3 class="poll-title">リモートワークとオフィスワーク、どちらが好きですか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">リモート派</span>
+                                <span class="option-icon">🏠</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">オフィス派</span>
+                                <span class="option-icon">🏢</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">12,456票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">1,023件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 人気投票カード2 -->
+                    <div class="poll-card poll-card-popular">
+                        <div class="popular-badge">🔥 トレンド</div>
+                        <div class="poll-card-header">
+                            <span class="poll-category category-entertainment">エンタメ</span>
+                            <span class="poll-time">2日前</span>
+                        </div>
+                        <h3 class="poll-title">映画は映画館で観る派？配信サービスで観る派？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">映画館派</span>
+                                <span class="option-icon">🎬</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">配信派</span>
+                                <span class="option-icon">📺</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">9,876票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">654件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 人気投票カード3 -->
+                    <div class="poll-card poll-card-popular">
+                        <div class="popular-badge">🔥 トレンド</div>
+                        <div class="poll-card-header">
+                            <span class="poll-category category-sports">スポーツ</span>
+                            <span class="poll-time">3日前</span>
+                        </div>
+                        <h3 class="poll-title">日本のプロ野球にDH制を統一すべきか？</h3>
+                        <div class="poll-options">
+                            <button class="poll-option poll-option-yes">
+                                <span class="option-label">統一すべき</span>
+                                <span class="option-icon">⚾</span>
+                            </button>
+                            <button class="poll-option poll-option-no">
+                                <span class="option-label">現状維持</span>
+                                <span class="option-icon">🧢</span>
+                            </button>
+                        </div>
+                        <div class="poll-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📊</span>
+                                <span class="stat-text">7,234票</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">💬</span>
+                                <span class="stat-text">487件</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">みんなの投票</h3>
+                    <p class="footer-text">みんなの意見を2択で可視化する<br>新しい投票プラットフォーム</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">投票を探す</a></li>
+                        <li><a href="#">人気の投票</a></li>
+                        <li><a href="#">カテゴリ一覧</a></li>
+                        <li><a href="#">投票作成依頼</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サポート</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">運営会社</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 みんなの投票. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

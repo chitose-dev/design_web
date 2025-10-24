@@ -1,0 +1,923 @@
+/* ========================================
+   投票詳細ページ専用スタイル
+   ======================================== */
+
+/* パンくずリスト */
+.breadcrumb {
+    background: white;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    margin: 0 8px;
+    color: var(--text-light);
+}
+
+.breadcrumb .current {
+    color: var(--text-secondary);
+}
+
+/* メインレイアウト */
+.poll-detail-main {
+    padding: 40px 0;
+    background: var(--bg-main);
+}
+
+.poll-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 32px;
+}
+
+/* 投票コンテンツ */
+.poll-content {
+    min-width: 0;
+}
+
+.poll-info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 32px;
+}
+
+.poll-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.poll-detail-title {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
+    letter-spacing: -0.5px;
+}
+
+.poll-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    padding: 20px;
+    background: var(--bg-main);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* 投票セクション */
+.vote-section {
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.vote-heading {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.vote-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.vote-btn {
+    background: white;
+    border: 4px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-main);
+    position: relative;
+    overflow: hidden;
+}
+
+.vote-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.vote-btn:hover::before {
+    opacity: 1;
+}
+
+.vote-btn-yes {
+    border-color: var(--yes-color);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.02) 100%);
+}
+
+.vote-btn-yes:hover {
+    background: var(--yes-color);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.3);
+}
+
+.vote-btn-no {
+    border-color: var(--no-color);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
+}
+
+.vote-btn-no:hover {
+    background: var(--no-color);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
+}
+
+.vote-btn:hover .vote-icon,
+.vote-btn:hover .vote-label,
+.vote-btn:hover .vote-sublabel {
+    color: white;
+}
+
+.vote-icon {
+    font-size: 48px;
+    transition: transform 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.vote-btn:hover .vote-icon {
+    transform: scale(1.2);
+}
+
+.vote-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: color 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.vote-sublabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+/* 結果セクション */
+.result-section {
+    margin-bottom: 40px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.result-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.total-votes {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-main);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+/* 結果ビジュアル */
+.result-visual {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* 円グラフ */
+.pie-chart-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+}
+
+.pie-chart {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.pie-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.pie-percentage {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
+}
+
+.pie-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* 結果バー */
+.result-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.result-item {
+    background: var(--bg-main);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid;
+}
+
+.result-yes {
+    border-color: var(--yes-color);
+}
+
+.result-no {
+    border-color: var(--no-color);
+}
+
+.result-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.result-icon {
+    font-size: 24px;
+}
+
+.result-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.result-bar-container {
+    background: rgba(0, 0, 0, 0.05);
+    height: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.result-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
+    border-radius: 16px;
+    transition: width 1s ease-out;
+    position: relative;
+}
+
+.result-no .result-bar {
+    background: linear-gradient(90deg, var(--no-color) 0%, var(--no-hover) 100%);
+}
+
+.result-numbers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-percentage {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
+}
+
+.result-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* SNS共有 */
+.share-section {
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+}
+
+.share-heading {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.share-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.share-twitter {
+    border-color: #1DA1F2;
+    color: #1DA1F2;
+}
+
+.share-twitter:hover {
+    background: #1DA1F2;
+    color: white;
+}
+
+.share-facebook {
+    border-color: #1877F2;
+    color: #1877F2;
+}
+
+.share-facebook:hover {
+    background: #1877F2;
+    color: white;
+}
+
+.share-line {
+    border-color: #00B900;
+    color: #00B900;
+}
+
+.share-line:hover {
+    background: #00B900;
+    color: white;
+}
+
+.share-copy {
+    border-color: #6b7280;
+    color: #6b7280;
+}
+
+.share-copy:hover {
+    background: #6b7280;
+    color: white;
+}
+
+/* コメントセクション */
+.comments-section {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.comments-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
+}
+
+.comments-filter {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.filter-yes.active {
+    background: var(--yes-color);
+    border-color: var(--yes-color);
+}
+
+.filter-no.active {
+    background: var(--no-color);
+    border-color: var(--no-color);
+}
+
+/* コメント投稿フォーム */
+.comment-form-card {
+    background: var(--bg-main);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.login-required p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.btn-login-comment {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+}
+
+.btn-login-comment:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* コメント一覧 */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.comment-card {
+    background: var(--bg-main);
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 5px solid;
+    transition: all 0.3s;
+}
+
+.comment-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.comment-yes {
+    border-color: var(--yes-color);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.03) 0%, transparent 100%);
+}
+
+.comment-no {
+    border-color: var(--no-color);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.03) 0%, transparent 100%);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.comment-time {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.comment-stance {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stance-yes {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--yes-hover);
+}
+
+.stance-no {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--no-hover);
+}
+
+.comment-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+}
+
+.reaction-btn:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.reaction-icon {
+    font-size: 16px;
+}
+
+.reply-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+}
+
+.reply-btn:hover {
+    text-decoration: underline;
+}
+
+.load-more-btn {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: white;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+}
+
+.load-more-btn:hover {
+    background: var(--bg-main);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* サイドバー */
+.sidebar {
+    position: sticky;
+    top: 150px;
+    align-self: start;
+}
+
+.sidebar-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+/* 関連投票 */
+.related-polls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.related-poll-item {
+    padding: 16px;
+    background: var(--bg-main);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.related-poll-item:hover {
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.related-category {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.related-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.related-votes {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* CTA */
+.sidebar-cta {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.sidebar-cta .sidebar-title {
+    color: white;
+}
+
+.sidebar-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    opacity: 0.9;
+}
+
+.btn-create-request {
+    width: 100%;
+    background: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+}
+
+.btn-create-request:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* タグ */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    padding: 6px 14px;
+    background: var(--bg-main);
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   レスポンシブデザイン
+   ======================================== */
+@media (max-width: 1024px) {
+    .poll-detail-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .result-visual {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .pie-chart-container {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .poll-info-card {
+        padding: 24px;
+    }
+    
+    .poll-detail-title {
+        font-size: 24px;
+    }
+    
+    .vote-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .comments-section {
+        padding: 24px;
+    }
+    
+    .comments-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .comments-filter {
+        width: 100%;
+        overflow-x: auto;
+    }
+    
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumb {
+        font-size: 12px;
+    }
+    
+    .poll-info-card {
+        padding: 20px;
+    }
+    
+    .poll-detail-title {
+        font-size: 20px;
+    }
+    
+    .vote-btn {
+        padding: 24px 16px;
+    }
+    
+    .vote-icon {
+        font-size: 36px;
+    }
+    
+    .vote-label {
+        font-size: 16px;
+    }
+    
+    .pie-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .pie-percentage {
+        font-size: 36px;
+    }
+    
+    .result-percentage {
+        font-size: 20px;
+    }
+    
+    .comments-section {
+        padding: 20px;
+    }
+    
+    .comment-card {
+        padding: 20px;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+    }
+    
+    .share-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
