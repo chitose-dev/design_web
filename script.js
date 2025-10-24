@@ -1,4 +1,115 @@
 // ========================================
+// ティッカー（スクロールメッセージ）の無限ループ
+// ========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const tickerContent = document.getElementById('tickerContent');
+    
+    if (tickerContent) {
+        // ティッカーコンテンツを複製して無限スクロールを実現
+        const tickerClone = tickerContent.cloneNode(true);
+        tickerContent.parentNode.appendChild(tickerClone);
+    }
+});
+
+// ========================================
+// 統計情報のアニメーション
+// ========================================
+function animateValue(element, start, end, duration) {
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+        }
+        
+        // 値をフォーマット
+        if (end >= 1000000) {
+            element.textContent = (current / 1000000).toFixed(1) + 'M';
+        } else if (end >= 1000) {
+            element.textContent = (current / 1000).toFixed(1) + 'K';
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 16);
+}
+
+// 統計情報の初期アニメーション
+window.addEventListener('load', function() {
+    const totalPollsEl = document.getElementById('totalPolls');
+    const totalVotesEl = document.getElementById('totalVotes');
+    const activeUsersEl = document.getElementById('activeUsers');
+    
+    if (totalPollsEl) animateValue(totalPollsEl, 0, 2847, 2000);
+    if (totalVotesEl) animateValue(totalVotesEl, 0, 1200000, 2000);
+    if (activeUsersEl) animateValue(activeUsersEl, 0, 8432, 2000);
+    
+    // 定期的に統計を更新（デモ用）
+    setInterval(() => {
+        if (totalPollsEl) {
+            const current = parseInt(totalPollsEl.textContent.replace(/,/g, ''));
+            animateValue(totalPollsEl, current, current + Math.floor(Math.random() * 5), 1000);
+        }
+        if (activeUsersEl) {
+            const current = parseInt(activeUsersEl.textContent.replace(/,/g, ''));
+            const change = Math.floor(Math.random() * 20) - 10;
+            animateValue(activeUsersEl, current, Math.max(0, current + change), 1000);
+        }
+    }, 5000);
+});
+
+// ========================================
+// 検索機能
+// ========================================
+const searchInput = document.querySelector('.search-input');
+const searchBtn = document.querySelector('.search-btn');
+
+if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', function() {
+        const query = searchInput.value.trim();
+        if (query) {
+            console.log('検索:', query);
+            // バックエンド実装後にAJAXリクエストを追加
+            alert(`「${query}」で検索します`);
+        }
+    });
+    
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchBtn.click();
+        }
+    });
+}
+
+// ========================================
+// クイックフィルター
+// ========================================
+const quickFilters = document.querySelectorAll('.quick-filter');
+
+quickFilters.forEach(filter => {
+    filter.addEventListener('click', function() {
+        // すべてのフィルターからactiveを削除
+        quickFilters.forEach(f => f.classList.remove('active'));
+        // クリックされたフィルターにactiveを追加
+        this.classList.add('active');
+        
+        const filterType = this.getAttribute('data-filter');
+        console.log('フィルター:', filterType);
+        
+        // アニメーション効果
+        this.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 200);
+        
+        // バックエンド実装後にフィルタリング処理を追加
+    });
+});
+
+// ========================================
 // モバイルメニュー
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
