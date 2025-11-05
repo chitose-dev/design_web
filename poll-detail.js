@@ -52,17 +52,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // 結果の更新（デモ用）
     // ========================================
     function updateResults(votedYes) {
-        const yesBar = document.querySelector('.result-yes .result-bar');
-        const noBar = document.querySelector('.result-no .result-bar');
         const totalVotesElement = document.querySelector('.total-votes');
-        const yesPercentage = document.querySelector('.result-yes .result-percentage');
-        const noPercentage = document.querySelector('.result-no .result-percentage');
-        const yesCount = document.querySelector('.result-yes .result-count');
-        const noCount = document.querySelector('.result-no .result-count');
+        const yesPercentageElem = document.querySelector('.result-yes .result-percentage');
+        const noPercentageElem = document.querySelector('.result-no .result-percentage');
+        const yesCountElem = document.querySelector('.result-yes .result-count');
+        const noCountElem = document.querySelector('.result-no .result-count');
+        
+        // 1本の横棒グラフの要素
+        const yesBar = document.querySelector('.combined-bar-yes');
+        const noBar = document.querySelector('.combined-bar-no');
+        const yesBarPercentage = yesBar ? yesBar.querySelector('.bar-percentage') : null;
+        const noBarPercentage = noBar ? noBar.querySelector('.bar-percentage') : null;
+        
+        // 詳細数値の要素
+        const detailCounts = document.querySelectorAll('.detail-count');
         
         let currentTotal = parseInt(totalVotesElement.textContent.replace(/[^0-9]/g, ''));
-        let currentYesCount = parseInt(yesCount.textContent.replace(/[^0-9]/g, ''));
-        let currentNoCount = parseInt(noCount.textContent.replace(/[^0-9]/g, ''));
+        let currentYesCount = detailCounts[0] ? parseInt(detailCounts[0].textContent.replace(/[^0-9]/g, '')) : 740;
+        let currentNoCount = detailCounts[1] ? parseInt(detailCounts[1].textContent.replace(/[^0-9]/g, '')) : 494;
         
         if (votedYes) {
             currentYesCount++;
@@ -75,12 +82,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const newNoPercentage = 100 - newYesPercentage;
         
         setTimeout(() => {
-            yesBar.style.width = newYesPercentage + '%';
-            noBar.style.width = newNoPercentage + '%';
-            yesPercentage.textContent = newYesPercentage + '%';
-            noPercentage.textContent = newNoPercentage + '%';
-            yesCount.textContent = currentYesCount + '票';
-            noCount.textContent = currentNoCount + '票';
+            // 横棒グラフの幅を更新
+            if (yesBar) yesBar.style.width = newYesPercentage + '%';
+            if (noBar) noBar.style.width = newNoPercentage + '%';
+            
+            // パーセンテージ表示を更新
+            if (yesBarPercentage) yesBarPercentage.textContent = newYesPercentage + '%';
+            if (noBarPercentage) noBarPercentage.textContent = newNoPercentage + '%';
+            
+            // 詳細数値を更新
+            if (detailCounts[0]) detailCounts[0].textContent = currentYesCount + '票';
+            if (detailCounts[1]) detailCounts[1].textContent = currentNoCount + '票';
+            
             totalVotesElement.textContent = `総投票数: ${currentTotal}票`;
             
             updateSemiCircleChart(newYesPercentage);
@@ -349,44 +362,6 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transform = 'translateY(20px)';
         element.style.transition = `all 0.6s ease ${index * 0.1}s`;
         fadeInObserver.observe(element);
-    });
-    
-    // ========================================
-    // コメントカードのアニメーション
-    // ========================================
-    commentCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(-20px)';
-        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
-        
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateX(0)';
-        }, 300);
-    });
-    
-    // ========================================
-    // 結果バーのアニメーション
-    // ========================================
-    const resultBars = document.querySelectorAll('.result-bar');
-    
-    const barObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.transition = 'width 1.5s ease-out';
-                    bar.style.width = width;
-                }, 100);
-                barObserver.unobserve(bar);
-            }
-        });
-    }, observerOptions);
-    
-    resultBars.forEach(bar => {
-        barObserver.observe(bar);
     });
     
     // ========================================
