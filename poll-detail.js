@@ -1,461 +1,491 @@
-// ========================================
-// 投票詳細ページ専用のJavaScript
-// ========================================
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票詳細 - みんなの投票</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="poll-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>みんなの投票</h1>
+                    <span class="logo-subtitle">2択アンケートプラットフォーム</span>
+                </div>
+                <nav class="nav">
+                    <a href="voting-site.html" class="nav-link">ホーム</a>
+                    <a href="category.html" class="nav-link">カテゴリ</a>
+                    <a href="trending.html" class="nav-link">人気投票</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // ========================================
-    // 投票ボタンの処理
-    // ========================================
-    const voteButtons = document.querySelectorAll('.vote-btn');
-    
-    voteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // すでに投票済みかチェック
-            if (document.body.classList.contains('voted')) {
-                alert('すでに投票済みです');
-                return;
-            }
-            
-            const voteLabel = this.querySelector('.vote-label').textContent;
-            const isYes = this.classList.contains('vote-btn-yes');
-            
-            // アニメーション効果
-            this.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1.05)';
-            }, 150);
-            
-            // 投票処理（バックエンド実装後にAJAXリクエストを追加）
-            console.log('投票:', voteLabel);
-            
-            // 視覚的フィードバック
-            this.style.boxShadow = isYes 
-                ? '0 0 0 4px rgba(34, 197, 94, 0.4)' 
-                : '0 0 0 4px rgba(239, 68, 68, 0.4)';
-            
-            setTimeout(() => {
-                this.style.boxShadow = '';
-                alert(`「${voteLabel}」に投票しました！\n結果が更新されました。`);
-                
-                // 選択状態を追加
-                this.classList.add('selected');
-                
-                // 結果セクションまでスクロール
-                const resultSection = document.querySelector('.result-section');
-                if (resultSection) {
-                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-                
-                // 投票済みフラグ
-                document.body.classList.add('voted');
-                
-                // デモ用：結果を更新（実際はバックエンドから取得）
-                updateResults(isYes);
-            }, 600);
-        });
-    });
-    
-    // ========================================
-    // 結果の更新（デモ用）
-    // ========================================
-    function updateResults(votedYes) {
-        // 現在の投票数を取得
-        const yesBar = document.querySelector('.result-yes .result-bar');
-        const noBar = document.querySelector('.result-no .result-bar');
-        const totalVotesElement = document.querySelector('.total-votes');
-        const yesPercentage = document.querySelector('.result-yes .result-percentage');
-        const noPercentage = document.querySelector('.result-no .result-percentage');
-        const yesCount = document.querySelector('.result-yes .result-count');
-        const noCount = document.querySelector('.result-no .result-count');
-        
-        // 現在の値を取得
-        let currentTotal = parseInt(totalVotesElement.textContent.replace(/[^0-9]/g, ''));
-        let currentYesCount = parseInt(yesCount.textContent.replace(/[^0-9]/g, ''));
-        let currentNoCount = parseInt(noCount.textContent.replace(/[^0-9]/g, ''));
-        
-        // 新しい値を計算
-        if (votedYes) {
-            currentYesCount++;
-        } else {
-            currentNoCount++;
-        }
-        currentTotal++;
-        
-        const newYesPercentage = Math.round((currentYesCount / currentTotal) * 100);
-        const newNoPercentage = 100 - newYesPercentage;
-        
-        // アニメーションで更新
-        setTimeout(() => {
-            yesBar.style.width = newYesPercentage + '%';
-            noBar.style.width = newNoPercentage + '%';
-            yesPercentage.textContent = newYesPercentage + '%';
-            noPercentage.textContent = newNoPercentage + '%';
-            yesCount.textContent = currentYesCount + '票';
-            noCount.textContent = currentNoCount + '票';
-            totalVotesElement.textContent = `総投票数: ${currentTotal}票`;
-            
-            // 円グラフも更新
-            updatePieChart(newYesPercentage);
-        }, 300);
-    }
-    
-    // ========================================
-    // 円グラフの更新
-    // ========================================
-    function updatePieChart(yesPercentage) {
-        const piePercentage = document.querySelector('.pie-percentage');
-        const pieLabel = document.querySelector('.pie-label');
-        
-        if (piePercentage) {
-            piePercentage.textContent = yesPercentage + '%';
-        }
-        
-        // SVG円グラフの更新
-        const circumference = 2 * Math.PI * 90;
-        const yesLength = (yesPercentage / 100) * circumference;
-        const noLength = circumference - yesLength;
-        
-        const circles = document.querySelectorAll('.pie-chart circle');
-        if (circles.length >= 2) {
-            circles[0].setAttribute('stroke-dasharray', `${yesLength} ${circumference}`);
-            circles[1].setAttribute('stroke-dasharray', `${noLength} ${circumference}`);
-            circles[1].setAttribute('stroke-dashoffset', `-${yesLength}`);
-        }
-    }
-    
-    // ========================================
-    // コメントフィルター
-    // ========================================
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const commentCards = document.querySelectorAll('.comment-card');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // すべてのボタンからactiveを削除
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // クリックされたボタンにactiveを追加
-            this.classList.add('active');
-            
-            const filter = this.getAttribute('data-filter');
-            
-            // コメントをフィルタリング
-            commentCards.forEach(card => {
-                if (filter === 'all') {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateX(0)';
-                    }, 10);
-                } else if (filter === 'yes' && card.classList.contains('comment-yes')) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateX(0)';
-                    }, 10);
-                } else if (filter === 'no' && card.classList.contains('comment-no')) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateX(0)';
-                    }, 10);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateX(-20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-            
-            // アニメーション効果
-            this.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-    });
-    
-    // ========================================
-    // コメントのリアクションボタン
-    // ========================================
-    const reactionButtons = document.querySelectorAll('.reaction-btn');
-    
-    reactionButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            const countElement = this.querySelector('.reaction-count');
-            let count = parseInt(countElement.textContent);
-            
-            // トグル処理（デモ用）
-            if (this.classList.contains('reacted')) {
-                count--;
-                this.classList.remove('reacted');
-                this.style.background = 'white';
-            } else {
-                count++;
-                this.classList.add('reacted');
-                this.style.background = '#e3f2fd';
-                this.style.borderColor = '#0066cc';
-            }
-            
-            countElement.textContent = count;
-            
-            // アニメーション
-            this.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-    });
-    
-    // ========================================
-    // 返信ボタン
-    // ========================================
-    const replyButtons = document.querySelectorAll('.reply-btn');
-    
-    replyButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation();
-            alert('返信機能は現在準備中です。\nログイン機能と合わせて実装予定です。');
-        });
-    });
-    
-    // ========================================
-    // SNS共有ボタン
-    // ========================================
-    const shareButtons = document.querySelectorAll('.share-btn');
-    
-    shareButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const pollTitle = document.querySelector('.poll-detail-title').textContent;
-            const currentUrl = window.location.href;
-            
-            if (this.classList.contains('share-twitter')) {
-                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(pollTitle)}&url=${encodeURIComponent(currentUrl)}`;
-                window.open(twitterUrl, '_blank', 'width=550,height=420');
-            } else if (this.classList.contains('share-facebook')) {
-                const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
-                window.open(facebookUrl, '_blank', 'width=550,height=420');
-            } else if (this.classList.contains('share-line')) {
-                const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}`;
-                window.open(lineUrl, '_blank', 'width=550,height=420');
-            } else if (this.classList.contains('share-copy')) {
-                // URLをクリップボードにコピー
-                navigator.clipboard.writeText(currentUrl).then(() => {
-                    // 成功フィードバック
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> コピーしました！';
-                    this.style.background = '#10b981';
-                    this.style.color = 'white';
-                    this.style.borderColor = '#10b981';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.style.background = '';
-                        this.style.color = '';
-                        this.style.borderColor = '';
-                    }, 2000);
-                }).catch(() => {
-                    alert('URLのコピーに失敗しました');
-                });
-            }
-            
-            // アニメーション
-            this.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-    });
-    
-    // ========================================
-    // コメントフォーム処理
-    // ========================================
-    const commentForm = document.getElementById('commentForm');
-    const stanceBtns = document.querySelectorAll('.stance-btn');
-    const stanceInput = document.getElementById('stance');
-    const commentTextarea = document.getElementById('commentText');
-    const charCount = document.getElementById('charCount');
-    
-    // 立場選択ボタン
-    stanceBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // すべてのボタンからselectedを削除
-            stanceBtns.forEach(b => b.classList.remove('selected'));
-            // クリックされたボタンにselectedを追加
-            this.classList.add('selected');
-            // hidden inputに値を設定
-            stanceInput.value = this.getAttribute('data-stance');
-            
-            // アニメーション
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-    });
-    
-    // 文字数カウント
-    if (commentTextarea && charCount) {
-        commentTextarea.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
-        });
-    }
-    
-    // フォーム送信
-    if (commentForm) {
-        commentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nickname = document.getElementById('nickname').value;
-            const email = document.getElementById('email').value;
-            const stance = stanceInput.value;
-            const comment = commentTextarea.value;
-            
-            // 立場が選択されているかチェック
-            if (!stance) {
-                alert('賛成か反対のどちらかを選択してください。');
-                return;
-            }
-            
-            // バックエンド実装後にAJAXリクエストを送信
-            console.log('コメント投稿:', {
-                nickname,
-                email,
-                stance,
-                comment
-            });
-            
-            // デモ用：投稿成功メッセージ
-            alert('コメントを投稿しました！\n（実際のサイトでは、投稿後にコメント一覧に表示されます）');
-            
-            // フォームをリセット
-            commentForm.reset();
-            stanceBtns.forEach(b => b.classList.remove('selected'));
-            charCount.textContent = '0';
-        });
-    }
-    
-    // ========================================
-    // さらに読み込むボタン
-    // ========================================
-    const loadMoreBtn = document.querySelector('.load-more-btn');
-    
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            this.textContent = '読み込み中...';
-            this.disabled = true;
-            
-            // デモ用：2秒後に完了
-            setTimeout(() => {
-                alert('これ以上コメントはありません。\n実際のサイトではここで追加のコメントが読み込まれます。');
-                this.textContent = 'さらに読み込む';
-                this.disabled = false;
-            }, 2000);
-        });
-    }
-    
-    // ========================================
-    // 関連投票アイテムのホバー効果
-    // ========================================
-    const relatedPollItems = document.querySelectorAll('.related-poll-item');
-    
-    relatedPollItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.3s ease';
-        });
-    });
-    
-    // ========================================
-    // スクロールアニメーション
-    // ========================================
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const fadeInObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // 各セクションにアニメーションを適用
-    const animatedElements = document.querySelectorAll('.vote-section, .result-section, .share-section, .comments-section, .sidebar-card');
-    
-    animatedElements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = `all 0.6s ease ${index * 0.1}s`;
-        fadeInObserver.observe(element);
-    });
-    
-    // ========================================
-    // コメントカードのアニメーション
-    // ========================================
-    commentCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(-20px)';
-        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
-        
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateX(0)';
-        }, 300);
-    });
-    
-    // ========================================
-    // 結果バーのアニメーション
-    // ========================================
-    const resultBars = document.querySelectorAll('.result-bar');
-    
-    const barObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.transition = 'width 1.5s ease-out';
-                    bar.style.width = width;
-                }, 100);
-                barObserver.unobserve(bar);
-            }
-        });
-    }, observerOptions);
-    
-    resultBars.forEach(bar => {
-        barObserver.observe(bar);
-    });
-    
-    // ========================================
-    // 円グラフの初期アニメーション
-    // ========================================
-    const pieChart = document.querySelector('.pie-chart');
-    
-    if (pieChart) {
-        const pieObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    pieChart.style.opacity = '0';
-                    pieChart.style.transform = 'scale(0.8) rotate(-90deg)';
-                    setTimeout(() => {
-                        pieChart.style.transition = 'all 1s ease-out';
-                        pieChart.style.opacity = '1';
-                        pieChart.style.transform = 'scale(1) rotate(0deg)';
-                    }, 100);
-                    pieObserver.unobserve(pieChart);
-                }
-            });
-        }, observerOptions);
-        
-        pieObserver.observe(pieChart);
-    }
-});
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="voting-site.html">ホーム</a>
+            <span>›</span>
+            <a href="#">政治</a>
+            <span>›</span>
+            <span class="current">消費税の軽減税率制度は継続すべきか？</span>
+        </div>
+    </div>
 
-console.log('投票詳細ページ - JavaScriptロード完了');
+    <!-- メインコンテンツ -->
+    <main class="poll-detail-main">
+        <div class="container">
+            <div class="poll-detail-layout">
+                <!-- 左カラム：投票内容 -->
+                <div class="poll-content">
+                    <!-- 投票情報 -->
+                    <div class="poll-info-card">
+                        <div class="poll-meta">
+                            <span class="poll-category">政治</span>
+                            <span class="poll-time">5分前に投稿</span>
+                        </div>
+                        <h1 class="poll-detail-title">消費税の軽減税率制度は継続すべきか？</h1>
+                        <p class="poll-description">
+                            現在実施されている消費税の軽減税率制度（食料品等に8%を適用）について、あなたの意見を聞かせてください。
+                            制度の簡素化を求める声がある一方、低所得者の負担軽減のために継続すべきという意見もあります。
+                        </p>
+
+                        <!-- 投票ボタン -->
+                        <div class="vote-section">
+                            <h3 class="vote-heading">あなたの意見は？</h3>
+                            <div class="vote-buttons">
+                                <button class="vote-btn vote-btn-yes">
+                                    <span class="vote-icon">👍</span>
+                                    <span class="vote-label">継続すべき</span>
+                                    <span class="vote-sublabel">YES</span>
+                                </button>
+                                <button class="vote-btn vote-btn-no">
+                                    <span class="vote-icon">👎</span>
+                                    <span class="vote-label">廃止すべき</span>
+                                    <span class="vote-sublabel">NO</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 投票結果（半円グラフ） -->
+                        <div class="result-section">
+                            <div class="result-header">
+                                <h3 class="result-heading">現在の投票結果</h3>
+                                <span class="total-votes">総投票数: 1,234票</span>
+                            </div>
+                            
+                            <!-- 半円グラフとバー -->
+                            <div class="result-visual">
+                                <!-- 半円グラフ -->
+                                <div class="pie-chart-container">
+                                    <svg class="pie-chart" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
+                                        <!-- 背景の半円 -->
+                                        <path d="M 20,100 A 80,80 0 0,1 180,100" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+                                        <!-- 賛成の半円（60%） -->
+                                        <path d="M 20,100 A 80,80 0 0,1 180,100" 
+                                              fill="none" 
+                                              stroke="#22c55e" 
+                                              stroke-width="20"
+                                              stroke-dasharray="251 251"
+                                              stroke-dashoffset="0"
+                                              stroke-linecap="round"
+                                              style="transition: stroke-dashoffset 1s ease-out;"/>
+                                        <!-- 反対の半円（40%） -->
+                                        <path d="M 20,100 A 80,80 0 0,1 180,100" 
+                                              fill="none" 
+                                              stroke="#ef4444" 
+                                              stroke-width="20"
+                                              stroke-dasharray="167 251"
+                                              stroke-dashoffset="-84"
+                                              stroke-linecap="round"
+                                              style="transition: stroke-dashoffset 1s ease-out;"/>
+                                    </svg>
+                                    <div class="pie-center">
+                                        <div class="pie-percentage">60%</div>
+                                        <div class="pie-label">継続派</div>
+                                    </div>
+                                </div>
+
+                                <!-- 結果詳細 -->
+                                <div class="result-bars">
+                                    <div class="result-item result-yes">
+                                        <div class="result-label">
+                                            <span class="result-icon">👍</span>
+                                            <span class="result-text">継続すべき</span>
+                                        </div>
+                                        <div class="result-bar-container">
+                                            <div class="result-bar" style="width: 60%"></div>
+                                        </div>
+                                        <div class="result-numbers">
+                                            <span class="result-percentage">60%</span>
+                                            <span class="result-count">740票</span>
+                                        </div>
+                                    </div>
+                                    <div class="result-item result-no">
+                                        <div class="result-label">
+                                            <span class="result-icon">👎</span>
+                                            <span class="result-text">廃止すべき</span>
+                                        </div>
+                                        <div class="result-bar-container">
+                                            <div class="result-bar" style="width: 40%"></div>
+                                        </div>
+                                        <div class="result-numbers">
+                                            <span class="result-percentage">40%</span>
+                                            <span class="result-count">494票</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SNS共有 -->
+                        <div class="share-section">
+                            <h4 class="share-heading">この投票をシェア</h4>
+                            <div class="share-buttons">
+                                <button class="share-btn share-twitter">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                    </svg>
+                                    X
+                                </button>
+                                <button class="share-btn share-facebook">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                    Facebook
+                                </button>
+                                <button class="share-btn share-line">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                                    </svg>
+                                    LINE
+                                </button>
+                                <button class="share-btn share-copy">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    コピー
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- コメントセクション -->
+                    <div class="comments-section">
+                        <div class="comments-header">
+                            <h2 class="comments-title">コメント (89件)</h2>
+                            <div class="comments-filter">
+                                <button class="filter-btn active" data-filter="all">すべて</button>
+                                <button class="filter-btn filter-yes" data-filter="yes">継続派 (54)</button>
+                                <button class="filter-btn filter-no" data-filter="no">廃止派 (35)</button>
+                            </div>
+                        </div>
+
+                        <!-- コメント投稿フォーム -->
+                        <div class="comment-form-card">
+                            <h3 class="comment-form-title">💬 コメントを投稿</h3>
+                            <form class="comment-form" id="commentForm">
+                                <!-- ニックネームとメールアドレス -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="nickname" class="form-label">ニックネーム <span class="required">*</span></label>
+                                        <input type="text" id="nickname" class="form-input" placeholder="例：山田太郎" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">メールアドレス <span class="required">*</span></label>
+                                        <input type="email" id="email" class="form-input" placeholder="example@email.com" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- 賛成・反対の選択 -->
+                                <div class="form-group">
+                                    <label class="form-label">あなたの立場 <span class="required">*</span></label>
+                                    <div class="stance-selector">
+                                        <button type="button" class="stance-btn stance-btn-yes" data-stance="yes">
+                                            <span class="stance-icon">👍</span>
+                                            <span class="stance-text">継続すべき</span>
+                                        </button>
+                                        <button type="button" class="stance-btn stance-btn-no" data-stance="no">
+                                            <span class="stance-icon">👎</span>
+                                            <span class="stance-text">廃止すべき</span>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="stance" name="stance" required>
+                                </div>
+                                
+                                <!-- コメント内容 -->
+                                <div class="form-group">
+                                    <label for="commentText" class="form-label">コメント <span class="required">*</span></label>
+                                    <textarea id="commentText" class="form-textarea" rows="5" placeholder="あなたの意見を詳しく教えてください...（200文字以内）" maxlength="200" required></textarea>
+                                    <div class="char-count">
+                                        <span id="charCount">0</span> / 200文字
+                                    </div>
+                                </div>
+                                
+                                <!-- 送信ボタン -->
+                                <button type="submit" class="btn-submit-comment">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                    コメントを投稿
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- コメント一覧 -->
+                        <div class="comments-list">
+                            <!-- 賛成意見 -->
+                            <div class="comment-card comment-yes">
+                                <div class="comment-header">
+                                    <div class="comment-user">
+                                        <div class="user-avatar">👤</div>
+                                        <div class="user-info">
+                                            <span class="user-name">山田太郎</span>
+                                            <span class="comment-time">2時間前</span>
+                                        </div>
+                                    </div>
+                                    <span class="comment-stance stance-yes">👍 継続派</span>
+                                </div>
+                                <p class="comment-text">
+                                    低所得者層への配慮は必要だと思います。食料品の税率を抑えることで、日々の生活への負担を軽減できます。
+                                    制度が複雑だという意見もありますが、国民の生活を守るための仕組みとして重要です。
+                                </p>
+                                <div class="comment-actions">
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">24</span>
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">3</span>
+                                    </button>
+                                    <button class="reply-btn">返信</button>
+                                </div>
+                            </div>
+
+                            <!-- 反対意見 -->
+                            <div class="comment-card comment-no">
+                                <div class="comment-header">
+                                    <div class="comment-user">
+                                        <div class="user-avatar">👤</div>
+                                        <div class="user-info">
+                                            <span class="user-name">佐藤花子</span>
+                                            <span class="comment-time">3時間前</span>
+                                        </div>
+                                    </div>
+                                    <span class="comment-stance stance-no">👎 廃止派</span>
+                                </div>
+                                <p class="comment-text">
+                                    軽減税率は事業者にとって事務負担が大きすぎます。レジシステムの改修や経理処理の複雑化など、
+                                    中小企業への負担を考えると、一律の税率にして別の方法で低所得者支援をすべきだと思います。
+                                </p>
+                                <div class="comment-actions">
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">18</span>
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">7</span>
+                                    </button>
+                                    <button class="reply-btn">返信</button>
+                                </div>
+                            </div>
+
+                            <!-- 賛成意見2 -->
+                            <div class="comment-card comment-yes">
+                                <div class="comment-header">
+                                    <div class="comment-user">
+                                        <div class="user-avatar">👤</div>
+                                        <div class="user-info">
+                                            <span class="user-name">田中一郎</span>
+                                            <span class="comment-time">5時間前</span>
+                                        </div>
+                                    </div>
+                                    <span class="comment-stance stance-yes">👍 継続派</span>
+                                </div>
+                                <p class="comment-text">
+                                    ヨーロッパなど多くの国で軽減税率が採用されています。日本も同様に、生活必需品への配慮は続けるべきです。
+                                    確かに複雑さはありますが、デジタル化が進めば解決できる問題だと思います。
+                                </p>
+                                <div class="comment-actions">
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">31</span>
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">5</span>
+                                    </button>
+                                    <button class="reply-btn">返信</button>
+                                </div>
+                            </div>
+
+                            <!-- 反対意見2 -->
+                            <div class="comment-card comment-no">
+                                <div class="comment-header">
+                                    <div class="comment-user">
+                                        <div class="user-avatar">👤</div>
+                                        <div class="user-info">
+                                            <span class="user-name">鈴木次郎</span>
+                                            <span class="comment-time">6時間前</span>
+                                        </div>
+                                    </div>
+                                    <span class="comment-stance stance-no">👎 廃止派</span>
+                                </div>
+                                <p class="comment-text">
+                                    制度が複雑すぎて、どれが8%でどれが10%なのか分かりにくい。外食とテイクアウトで税率が変わるのも不便です。
+                                    シンプルな税制にして、給付金などで直接支援する方が効率的だと考えます。
+                                </p>
+                                <div class="comment-actions">
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">22</span>
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">9</span>
+                                    </button>
+                                    <button class="reply-btn">返信</button>
+                                </div>
+                            </div>
+
+                            <!-- 賛成意見3 -->
+                            <div class="comment-card comment-yes">
+                                <div class="comment-header">
+                                    <div class="comment-user">
+                                        <div class="user-avatar">👤</div>
+                                        <div class="user-info">
+                                            <span class="user-name">伊藤美咲</span>
+                                            <span class="comment-time">8時間前</span>
+                                        </div>
+                                    </div>
+                                    <span class="comment-stance stance-yes">👍 継続派</span>
+                                </div>
+                                <p class="comment-text">
+                                    子育て世帯として、食料品の税率が低いのは本当に助かります。毎日の買い物で2%の違いは大きいです。
+                                    制度を廃止するよりも、もっと分かりやすく改善していく方向で考えてほしいです。
+                                </p>
+                                <div class="comment-actions">
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">42</span>
+                                    </button>
+                                    <button class="reaction-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">4</span>
+                                    </button>
+                                    <button class="reply-btn">返信</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="load-more-btn">さらに読み込む</button>
+                    </div>
+                </div>
+
+                <!-- 右サイドバー -->
+                <aside class="sidebar">
+                    <!-- 関連投票 -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">関連する投票</h3>
+                        <div class="related-polls">
+                            <a href="#" class="related-poll-item">
+                                <span class="related-category">政治</span>
+                                <p class="related-title">インボイス制度は継続すべきか？</p>
+                                <span class="related-votes">2,345票</span>
+                            </a>
+                            <a href="#" class="related-poll-item">
+                                <span class="related-category">経済</span>
+                                <p class="related-title">最低賃金を全国一律1,500円に引き上げるべきか？</p>
+                                <span class="related-votes">2,891票</span>
+                            </a>
+                            <a href="#" class="related-poll-item">
+                                <span class="related-category">政治</span>
+                                <p class="related-title">法人税率を引き下げるべきか？</p>
+                                <span class="related-votes">1,567票</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 投票作成依頼 -->
+                    <div class="sidebar-card sidebar-cta">
+                        <h3 class="sidebar-title">投票を作成依頼</h3>
+                        <p class="sidebar-text">あなたが意見を聞きたいテーマを投稿してください</p>
+                        <button class="btn-create-request">依頼フォームへ</button>
+                    </div>
+
+                    <!-- 人気タグ -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">人気のタグ</h3>
+                        <div class="tags">
+                            <a href="#" class="tag">#消費税</a>
+                            <a href="#" class="tag">#税制改革</a>
+                            <a href="#" class="tag">#軽減税率</a>
+                            <a href="#" class="tag">#経済政策</a>
+                            <a href="#" class="tag">#生活費</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">みんなの投票</h3>
+                    <p class="footer-text">みんなの意見を2択で可視化する<br>新しい投票プラットフォーム</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">投票を探す</a></li>
+                        <li><a href="#">人気の投票</a></li>
+                        <li><a href="#">カテゴリ一覧</a></li>
+                        <li><a href="#">投票作成依頼</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">サポート</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">使い方ガイド</a></li>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">法的情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">運営会社</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 みんなの投票. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="poll-detail.js"></script>
+</body>
+</html>
