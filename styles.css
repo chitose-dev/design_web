@@ -674,6 +674,9 @@ body {
     line-height: 1.5;
     margin-bottom: 20px;
     color: var(--text-primary);
+    min-height: 54px;
+    display: flex;
+    align-items: center;
 }
 
 /* 一覧ページの結果プレビュー（1本の横棒グラフ） */
