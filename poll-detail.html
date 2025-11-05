@@ -79,16 +79,15 @@
                             </div>
                         </div>
 
-                        <!-- 投票結果（半円グラフ） -->
+                        <!-- 投票結果（半円グラフのみ） -->
                         <div class="result-section">
                             <div class="result-header">
                                 <h3 class="result-heading">現在の投票結果</h3>
                                 <span class="total-votes">総投票数: 1,234票</span>
                             </div>
                             
-                            <!-- 半円グラフとバー -->
-                            <div class="result-visual">
-                                <!-- 半円グラフ -->
+                            <!-- 半円グラフ -->
+                            <div class="result-visual-center">
                                 <div class="pie-chart-container">
                                     <svg class="pie-chart" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet">
                                         <!-- 背景の半円 -->
@@ -117,33 +116,33 @@
                                         <div class="pie-label">継続派</div>
                                     </div>
                                 </div>
-
-                                <!-- 結果詳細 -->
-                                <div class="result-bars">
-                                    <div class="result-item result-yes">
-                                        <div class="result-label">
-                                            <span class="result-icon">👍</span>
-                                            <span class="result-text">継続すべき</span>
+                                
+                                <!-- 1本の横棒グラフ -->
+                                <div class="combined-bar-wrapper">
+                                    <div class="combined-bar-container">
+                                        <div class="combined-bar-yes" style="width: 60%">
+                                            <span class="bar-icon">👍</span>
+                                            <span class="bar-label">継続すべき</span>
+                                            <span class="bar-percentage">60%</span>
                                         </div>
-                                        <div class="result-bar-container">
-                                            <div class="result-bar" style="width: 60%"></div>
-                                        </div>
-                                        <div class="result-numbers">
-                                            <span class="result-percentage">60%</span>
-                                            <span class="result-count">740票</span>
+                                        <div class="combined-bar-no" style="width: 40%">
+                                            <span class="bar-percentage">40%</span>
+                                            <span class="bar-label">廃止すべき</span>
+                                            <span class="bar-icon">👎</span>
                                         </div>
                                     </div>
-                                    <div class="result-item result-no">
-                                        <div class="result-label">
-                                            <span class="result-icon">👎</span>
-                                            <span class="result-text">廃止すべき</span>
+                                    
+                                    <!-- 詳細数値 -->
+                                    <div class="vote-details">
+                                        <div class="vote-detail-item">
+                                            <span class="detail-icon">👍</span>
+                                            <span class="detail-label">継続すべき</span>
+                                            <span class="detail-count">740票</span>
                                         </div>
-                                        <div class="result-bar-container">
-                                            <div class="result-bar" style="width: 40%"></div>
-                                        </div>
-                                        <div class="result-numbers">
-                                            <span class="result-percentage">40%</span>
-                                            <span class="result-count">494票</span>
+                                        <div class="vote-detail-item">
+                                            <span class="detail-icon">👎</span>
+                                            <span class="detail-label">廃止すべき</span>
+                                            <span class="detail-count">494票</span>
                                         </div>
                                     </div>
                                 </div>
