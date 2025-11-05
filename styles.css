@@ -676,59 +676,44 @@ body {
     color: var(--text-primary);
 }
 
-/* 一覧ページの結果プレビュー（横棒グラフ） */
-.poll-result-preview {
-    margin-bottom: 20px;
-}
-
-.result-row {
+/* 一覧ページの結果プレビュー（1本の横棒グラフ） */
+.poll-result-bar {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.result-row:last-child {
-    margin-bottom: 0;
-}
-
-.result-label-small {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    min-width: 60px;
-    flex-shrink: 0;
-}
-
-.result-bar-small {
-    flex: 1;
-    height: 28px;
-    background: var(--bg-main);
-    border-radius: 14px;
+    height: 36px;
+    border-radius: 18px;
     overflow: hidden;
-    position: relative;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.result-fill-yes,
-.result-fill-no {
-    height: 100%;
+.result-bar-yes {
+    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
-    font-size: 12px;
-    font-weight: 700;
+    justify-content: center;
     color: white;
-    transition: width 0.8s ease-out;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.8s ease-out;
     position: relative;
 }
 
-.result-fill-yes {
-    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
+.result-bar-no {
+    background: linear-gradient(90deg, var(--no-hover) 0%, var(--no-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.8s ease-out;
+    position: relative;
 }
 
-.result-fill-no {
-    background: linear-gradient(90deg, var(--no-color) 0%, var(--no-hover) 100%);
+.result-bar-label {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 /* ========================================
@@ -1074,6 +1059,14 @@ body {
     
     .option-label {
         font-size: 13px;
+    }
+    
+    .poll-result-bar {
+        height: 32px;
+    }
+    
+    .result-bar-label {
+        font-size: 12px;
     }
     
     .poll-stats {
