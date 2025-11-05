@@ -146,7 +146,6 @@
     box-shadow: 0 12px 24px rgba(34, 197, 94, 0.3);
 }
 
-/* 投票後の選択状態 */
 .vote-btn-yes.selected {
     background: var(--yes-color);
     border-color: var(--yes-hover);
@@ -170,7 +169,6 @@
     box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
 }
 
-/* 投票後の選択状態 */
 .vote-btn-no.selected {
     background: var(--no-color);
     border-color: var(--no-hover);
@@ -183,7 +181,6 @@
     color: white;
 }
 
-/* 投票済みの場合は選択されていない方を薄く表示 */
 body.voted .vote-btn:not(.selected) {
     opacity: 0.5;
     cursor: not-allowed;
@@ -200,180 +197,6 @@ body.voted .vote-btn:not(.selected) {
     transition: transform 0.3s;
     position: relative;
     z-index: 1;
-}
-
-.vote-btn:hover .vote-icon {
-    transform: scale(1.2);
-}
-
-.vote-label {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    transition: color 0.3s;
-    position: relative;
-    z-index: 1;
-}
-
-.vote-sublabel {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    opacity: 0.7;
-    transition: color 0.3s;
-    position: relative;
-    z-index: 1;
-}
-
-/* 結果セクション */
-.result-section {
-    margin-bottom: 40px;
-}
-
-.result-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-}
-
-.result-heading {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.total-votes {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    background: var(--bg-main);
-    padding: 8px 16px;
-    border-radius: 20px;
-}
-
-/* 結果ビジュアル */
-.result-visual {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-/* 円グラフ */
-.pie-chart-container {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pie-chart {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
-
-.pie-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.pie-percentage {
-    font-size: 48px;
-    font-weight: 900;
-    color: var(--text-primary);
-    font-family: var(--font-accent);
-}
-
-.pie-label {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-top: 4px;
-}
-
-/* 結果バー */
-.result-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.result-item {
-    background: var(--bg-main);
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 5px solid;
-}
-
-.result-yes {
-    border-color: var(--yes-color);
-}
-
-.result-no {
-    border-color: var(--no-color);
-}
-
-.result-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.result-icon {
-    font-size: 24px;
-}
-
-.result-text {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.result-bar-container {
-    background: rgba(0, 0, 0, 0.05);
-    height: 32px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.result-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
-    border-radius: 16px;
-    transition: width 1s ease-out;
-    position: relative;
-}
-
-.result-no .result-bar {
-    background: linear-gradient(90deg, var(--no-color) 0%, var(--no-hover) 100%);
-}
-
-.result-numbers {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.result-percentage {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--text-primary);
-    font-family: var(--font-accent);
-}
-
-.result-count {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-secondary);
 }
 
 /* SNS共有 */
@@ -521,36 +344,178 @@ body.voted .vote-btn:not(.selected) {
 
 /* コメント投稿フォーム */
 .comment-form-card {
-    background: var(--bg-main);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     border-radius: 12px;
     padding: 32px;
     margin-bottom: 32px;
-    text-align: center;
+    border: 2px solid var(--border-color);
 }
 
-.login-required p {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-}
-
-.btn-login-comment {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 8px;
+.comment-form-title {
+    font-size: 20px;
     font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.required {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.form-input,
+.form-textarea {
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     font-size: 15px;
+    font-family: var(--font-main);
+    transition: all 0.3s;
+    background: white;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.char-count {
+    text-align: right;
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.stance-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stance-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border: 3px solid var(--border-color);
+    border-radius: 12px;
+    background: white;
     cursor: pointer;
     transition: all 0.3s;
     font-family: var(--font-main);
 }
 
-.btn-login-comment:hover {
-    background: var(--primary-dark);
+.stance-btn:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+}
+
+.stance-btn-yes {
+    border-color: var(--yes-color);
+    background: rgba(34, 197, 94, 0.05);
+}
+
+.stance-btn-yes:hover {
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.stance-btn-yes.selected {
+    background: var(--yes-color);
+    border-color: var(--yes-hover);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.stance-btn-yes.selected .stance-icon,
+.stance-btn-yes.selected .stance-text {
+    color: white;
+}
+
+.stance-btn-no {
+    border-color: var(--no-color);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.stance-btn-no:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.stance-btn-no.selected {
+    background: var(--no-color);
+    border-color: var(--no-hover);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.stance-btn-no.selected .stance-icon,
+.stance-btn-no.selected .stance-text {
+    color: white;
+}
+
+.stance-icon {
+    font-size: 32px;
+}
+
+.stance-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: color 0.3s;
+}
+
+.btn-submit-comment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.btn-submit-comment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+}
+
+.btn-submit-comment:active {
+    transform: translateY(0);
 }
 
 /* コメント一覧 */
@@ -878,7 +843,6 @@ body.voted .vote-btn:not(.selected) {
         font-size: 24px;
     }
     
-    /* スマホで投票ボタンを横並びコンパクトに */
     .vote-buttons {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
@@ -900,7 +864,6 @@ body.voted .vote-btn:not(.selected) {
         font-size: 12px;
     }
     
-    /* 結果バーをコンパクトに */
     .result-item {
         padding: 16px;
     }
@@ -935,6 +898,14 @@ body.voted .vote-btn:not(.selected) {
     .sidebar {
         grid-template-columns: 1fr;
     }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .comment-form-card {
+        padding: 24px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -964,7 +935,7 @@ body.voted .vote-btn:not(.selected) {
     
     .pie-chart-container {
         width: 220px;
-        height: 220px;
+        height: 140px;
     }
     
     .pie-percentage {
@@ -990,193 +961,5 @@ body.voted .vote-btn:not(.selected) {
     .share-btn {
         width: 100%;
         justify-content: center;
-    }
-}
-/* ========================================
-   コメント投稿フォーム
-   ======================================== */
-.comment-form-card {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border-radius: 12px;
-    padding: 32px;
-    margin-bottom: 32px;
-    border: 2px solid var(--border-color);
-}
-
-.comment-form-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: var(--text-primary);
-}
-
-.comment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.required {
-    color: #ef4444;
-    font-weight: 700;
-}
-
-.form-input,
-.form-textarea {
-    padding: 12px 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 15px;
-    font-family: var(--font-main);
-    transition: all 0.3s;
-    background: white;
-}
-
-.form-input:focus,
-.form-textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-}
-
-.form-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.char-count {
-    text-align: right;
-    font-size: 13px;
-    color: var(--text-light);
-}
-
-.stance-selector {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.stance-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
-    border: 3px solid var(--border-color);
-    border-radius: 12px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: var(--font-main);
-}
-
-.stance-btn:hover {
-    transform: translateY(-2px);
-}
-
-.stance-btn-yes {
-    border-color: var(--yes-color);
-    background: rgba(34, 197, 94, 0.05);
-}
-
-.stance-btn-yes:hover {
-    background: rgba(34, 197, 94, 0.1);
-}
-
-.stance-btn-yes.selected {
-    background: var(--yes-color);
-    border-color: var(--yes-hover);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
-}
-
-.stance-btn-yes.selected .stance-icon,
-.stance-btn-yes.selected .stance-text {
-    color: white;
-}
-
-.stance-btn-no {
-    border-color: var(--no-color);
-    background: rgba(239, 68, 68, 0.05);
-}
-
-.stance-btn-no:hover {
-    background: rgba(239, 68, 68, 0.1);
-}
-
-.stance-btn-no.selected {
-    background: var(--no-color);
-    border-color: var(--no-hover);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-}
-
-.stance-btn-no.selected .stance-icon,
-.stance-btn-no.selected .stance-text {
-    color: white;
-}
-
-.stance-icon {
-    font-size: 32px;
-}
-
-.stance-text {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-primary);
-    transition: color 0.3s;
-}
-
-.btn-submit-comment {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-    color: white;
-    border: none;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: var(--font-main);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-}
-
-.btn-submit-comment:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
-}
-
-.btn-submit-comment:active {
-    transform: translateY(0);
-}
-
-/* レスポンシブ - フォーム */
-@media (max-width: 768px) {
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .comment-form-card {
-        padding: 24px;
     }
 }
