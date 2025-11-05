@@ -249,19 +249,19 @@ body.voted .vote-btn:not(.selected) {
     border-radius: 20px;
 }
 
-/* 結果ビジュアル */
-.result-visual {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
+/* 結果ビジュアル - 中央配置 */
+.result-visual-center {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 40px;
 }
 
 /* 半円グラフ */
 .pie-chart-container {
     position: relative;
-    width: 280px;
-    height: 180px;
+    width: 320px;
+    height: 200px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -269,8 +269,8 @@ body.voted .vote-btn:not(.selected) {
 
 .pie-chart {
     width: 100%;
-    height: 140px;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    height: 160px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 .pie-center {
@@ -282,95 +282,109 @@ body.voted .vote-btn:not(.selected) {
 }
 
 .pie-percentage {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 900;
     color: var(--text-primary);
     font-family: var(--font-accent);
+    line-height: 1;
 }
 
 .pie-label {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--text-secondary);
-    margin-top: 4px;
+    margin-top: 8px;
 }
 
-/* 結果バー */
-.result-bars {
+/* 1本の横棒グラフ */
+.combined-bar-wrapper {
+    width: 100%;
+    max-width: 700px;
+}
+
+.combined-bar-container {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    height: 60px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
 }
 
-.result-item {
-    background: var(--bg-main);
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 5px solid;
-}
-
-.result-yes {
-    border-color: var(--yes-color);
-}
-
-.result-no {
-    border-color: var(--no-color);
-}
-
-.result-label {
+.combined-bar-yes {
+    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.result-icon {
-    font-size: 24px;
-}
-
-.result-text {
-    font-size: 16px;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
+    color: white;
     font-weight: 700;
-    color: var(--text-primary);
-}
-
-.result-bar-container {
-    background: rgba(0, 0, 0, 0.05);
-    height: 32px;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.result-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--yes-color) 0%, var(--yes-hover) 100%);
-    border-radius: 16px;
-    transition: width 1s ease-out;
+    transition: all 0.8s ease-out;
     position: relative;
 }
 
-.result-no .result-bar {
-    background: linear-gradient(90deg, var(--no-color) 0%, var(--no-hover) 100%);
-}
-
-.result-numbers {
+.combined-bar-no {
+    background: linear-gradient(90deg, var(--no-hover) 0%, var(--no-color) 100%);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
+    color: white;
+    font-weight: 700;
+    transition: all 0.8s ease-out;
+    position: relative;
 }
 
-.result-percentage {
+.bar-icon {
     font-size: 24px;
+}
+
+.bar-label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.bar-percentage {
+    font-size: 20px;
     font-weight: 900;
-    color: var(--text-primary);
     font-family: var(--font-accent);
 }
 
-.result-count {
-    font-size: 14px;
+/* 詳細数値 */
+.vote-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.vote-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-main);
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+}
+
+.detail-icon {
+    font-size: 28px;
+}
+
+.detail-label {
+    flex: 1;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text-secondary);
+}
+
+.detail-count {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-accent);
 }
 
 /* SNS共有 */
@@ -998,13 +1012,16 @@ body.voted .vote-btn:not(.selected) {
         gap: 24px;
     }
     
-    .result-visual {
-        grid-template-columns: 1fr;
+    .result-visual-center {
         gap: 32px;
     }
     
     .pie-chart-container {
         margin: 0 auto;
+    }
+    
+    .combined-bar-wrapper {
+        max-width: 600px;
     }
 }
 
@@ -1038,21 +1055,40 @@ body.voted .vote-btn:not(.selected) {
         font-size: 12px;
     }
     
-    .result-item {
-        padding: 16px;
+    .combined-bar-container {
+        height: 50px;
     }
     
-    .result-bar-container {
-        height: 24px;
-        margin-bottom: 10px;
-    }
-    
-    .result-percentage {
+    .bar-icon {
         font-size: 20px;
     }
     
-    .result-count {
-        font-size: 13px;
+    .bar-label {
+        display: none;
+    }
+    
+    .bar-percentage {
+        font-size: 16px;
+    }
+    
+    .vote-details {
+        gap: 12px;
+    }
+    
+    .vote-detail-item {
+        padding: 12px 16px;
+    }
+    
+    .detail-icon {
+        font-size: 24px;
+    }
+    
+    .detail-label {
+        font-size: 14px;
+    }
+    
+    .detail-count {
+        font-size: 16px;
     }
     
     .comments-section {
@@ -1108,16 +1144,39 @@ body.voted .vote-btn:not(.selected) {
     }
     
     .pie-chart-container {
-        width: 220px;
+        width: 280px;
+        height: 180px;
+    }
+    
+    .pie-chart {
         height: 140px;
     }
     
     .pie-percentage {
-        font-size: 36px;
+        font-size: 44px;
     }
     
-    .result-percentage {
-        font-size: 20px;
+    .pie-label {
+        font-size: 16px;
+    }
+    
+    .combined-bar-container {
+        height: 44px;
+        flex-direction: column;
+    }
+    
+    .combined-bar-yes,
+    .combined-bar-no {
+        width: 100% !important;
+        justify-content: space-between;
+    }
+    
+    .bar-icon {
+        font-size: 18px;
+    }
+    
+    .vote-details {
+        grid-template-columns: 1fr;
     }
     
     .comments-section {
