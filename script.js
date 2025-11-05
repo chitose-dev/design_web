@@ -186,14 +186,14 @@ pollCards.forEach(card => {
 // 投票結果の更新（デモ用）
 // ========================================
 function updateCardResults(card, votedFor) {
-    const yesBar = card.querySelector('.result-fill-yes');
-    const noBar = card.querySelector('.result-fill-no');
+    const yesBar = card.querySelector('.result-bar-yes');
+    const noBar = card.querySelector('.result-bar-no');
     
     if (!yesBar || !noBar) return;
     
     // 現在のパーセンテージを取得
-    let yesPercent = parseInt(yesBar.textContent);
-    let noPercent = parseInt(noBar.textContent);
+    let yesPercent = parseInt(yesBar.getAttribute('data-percentage'));
+    let noPercent = parseInt(noBar.getAttribute('data-percentage'));
     
     // 投票を反映（簡易計算）
     if (votedFor === 'yes') {
@@ -207,9 +207,21 @@ function updateCardResults(card, votedFor) {
     // アニメーションで更新
     setTimeout(() => {
         yesBar.style.width = yesPercent + '%';
-        yesBar.textContent = yesPercent + '%';
+        yesBar.setAttribute('data-percentage', yesPercent);
         noBar.style.width = noPercent + '%';
-        noBar.textContent = noPercent + '%';
+        noBar.setAttribute('data-percentage', noPercent);
+        
+        // ラベルも更新
+        const yesLabel = yesBar.querySelector('.result-bar-label');
+        const noLabel = noBar.querySelector('.result-bar-label');
+        if (yesLabel) {
+            const icon = yesLabel.textContent.split(' ')[0];
+            yesLabel.textContent = `${icon} ${yesPercent}%`;
+        }
+        if (noLabel) {
+            const icon = noLabel.textContent.split(' ')[0];
+            noLabel.textContent = `${icon} ${noPercent}%`;
+        }
     }, 600);
 }
 
