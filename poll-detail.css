@@ -1238,46 +1238,44 @@ body.voted .vote-btn:not(.selected) {
         margin-top: 6px;
     }
     
-    /* 横棒グラフ - 縦積み表示 */
+    /* 横棒グラフ - 1本のまま、パーセンテージのみ表示 */
     .combined-bar-wrapper {
         width: 100%;
         max-width: 100%;
     }
     
     .combined-bar-container {
-        height: auto;
-        flex-direction: column;
-        border-radius: 12px;
+        height: 50px;
+        flex-direction: row;
+        border-radius: 25px;
     }
     
     .combined-bar-yes,
     .combined-bar-no {
-        width: 100% !important;
         height: 50px;
-        justify-content: space-between;
-        padding: 0 20px;
+        justify-content: center;
+        padding: 0 12px;
     }
     
     .combined-bar-yes {
-        border-radius: 12px 12px 0 0;
+        border-radius: 25px 0 0 25px;
     }
     
     .combined-bar-no {
-        border-radius: 0 0 12px 12px;
-        border-top: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 0 25px 25px 0;
+        border-top: none;
     }
     
     .bar-icon {
-        font-size: 20px;
+        display: none;
     }
     
     .bar-label {
-        display: inline-block;
-        font-size: 13px;
+        display: none;
     }
     
     .bar-percentage {
-        font-size: 18px;
+        font-size: 20px;
     }
     
     /* 詳細数値 */
