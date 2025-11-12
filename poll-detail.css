@@ -1121,78 +1121,433 @@ body.voted .vote-btn:not(.selected) {
 @media (max-width: 480px) {
     .breadcrumb {
         font-size: 12px;
+        padding: 12px 0;
+    }
+    
+    .poll-detail-main {
+        padding: 20px 0;
     }
     
     .poll-info-card {
-        padding: 20px;
+        padding: 16px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+    }
+    
+    .poll-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
     }
     
     .poll-detail-title {
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+    
+    .poll-description {
+        font-size: 13px;
+        line-height: 1.7;
+        padding: 12px;
+        margin-bottom: 24px;
+    }
+    
+    /* 投票セクション */
+    .vote-section {
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+    }
+    
+    .vote-heading {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .vote-buttons {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
     
     .vote-btn {
-        padding: 24px 16px;
+        padding: 20px 12px;
+        border-radius: 12px;
+        border-width: 3px;
     }
     
     .vote-icon {
-        font-size: 36px;
+        font-size: 32px;
     }
     
     .vote-label {
+        font-size: 14px;
+    }
+    
+    .vote-sublabel {
+        font-size: 11px;
+    }
+    
+    /* 結果セクション */
+    .result-section {
+        margin-bottom: 24px;
+    }
+    
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    
+    .result-heading {
         font-size: 16px;
     }
     
+    .total-votes {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+    
+    .result-visual-center {
+        gap: 24px;
+    }
+    
+    /* 半円グラフ */
     .pie-chart-container {
-        width: 280px;
-        height: 180px;
+        width: 100%;
+        max-width: 300px;
+        height: 160px;
     }
     
     .pie-chart {
-        height: 140px;
+        width: 100%;
+        height: 200px;
+    }
+    
+    .pie-center {
+        bottom: 20px;
     }
     
     .pie-percentage {
-        font-size: 44px;
+        font-size: 40px;
     }
     
     .pie-label {
-        font-size: 16px;
+        font-size: 14px;
+        margin-top: 6px;
+    }
+    
+    /* 横棒グラフ - 縦積み表示 */
+    .combined-bar-wrapper {
+        width: 100%;
+        max-width: 100%;
     }
     
     .combined-bar-container {
-        height: 44px;
+        height: auto;
         flex-direction: column;
+        border-radius: 12px;
     }
     
     .combined-bar-yes,
     .combined-bar-no {
         width: 100% !important;
+        height: 50px;
         justify-content: space-between;
+        padding: 0 20px;
+    }
+    
+    .combined-bar-yes {
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .combined-bar-no {
+        border-radius: 0 0 12px 12px;
+        border-top: 2px solid rgba(255, 255, 255, 0.3);
     }
     
     .bar-icon {
+        font-size: 20px;
+    }
+    
+    .bar-label {
+        display: inline-block;
+        font-size: 13px;
+    }
+    
+    .bar-percentage {
         font-size: 18px;
     }
     
+    /* 詳細数値 */
     .vote-details {
         grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 16px;
     }
     
-    .comments-section {
-        padding: 20px;
+    .vote-detail-item {
+        padding: 12px 16px;
+        border-radius: 10px;
     }
     
-    .comment-card {
-        padding: 20px;
+    .detail-icon {
+        font-size: 22px;
+    }
+    
+    .detail-label {
+        font-size: 13px;
+    }
+    
+    .detail-count {
+        font-size: 16px;
+    }
+    
+    /* SNS共有 */
+    .share-section {
+        padding-top: 20px;
+    }
+    
+    .share-heading {
+        font-size: 14px;
+        margin-bottom: 12px;
     }
     
     .share-buttons {
         flex-direction: column;
+        gap: 8px;
     }
     
     .share-btn {
         width: 100%;
         justify-content: center;
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    /* コメントセクション */
+    .comments-section {
+        padding: 16px;
+        border-radius: 12px;
+    }
+    
+    .comments-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .comments-title {
+        font-size: 18px;
+    }
+    
+    .comments-filter {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+        white-space: nowrap;
+    }
+    
+    /* コメントフォーム */
+    .comment-form-card {
+        padding: 16px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .comment-form-title {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .comment-form {
+        gap: 16px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .form-label {
+        font-size: 13px;
+    }
+    
+    .form-input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .form-textarea {
+        min-height: 100px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .char-count {
+        font-size: 12px;
+    }
+    
+    .stance-selector {
+        gap: 8px;
+    }
+    
+    .stance-btn {
+        padding: 14px 12px;
+        border-width: 2px;
+    }
+    
+    .stance-icon {
+        font-size: 28px;
+    }
+    
+    .stance-text {
+        font-size: 13px;
+    }
+    
+    .btn-submit-comment {
+        padding: 12px 24px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+    
+    /* コメント一覧 */
+    .comments-list {
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .comment-card {
+        padding: 16px;
+        border-radius: 10px;
+        border-left-width: 4px;
+    }
+    
+    .comment-header {
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .comment-user {
+        gap: 10px;
+    }
+    
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .user-name {
+        font-size: 14px;
+    }
+    
+    .comment-time {
+        font-size: 11px;
+    }
+    
+    .comment-stance {
+        padding: 4px 10px;
+        font-size: 11px;
+    }
+    
+    .comment-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+    }
+    
+    .comment-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .reaction-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    .reaction-icon {
+        font-size: 14px;
+    }
+    
+    .reply-btn {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+    
+    .load-more-btn {
+        padding: 14px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+    
+    /* サイドバー */
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar-card {
+        padding: 16px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+    
+    .sidebar-title {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .related-polls {
+        gap: 12px;
+    }
+    
+    .related-poll-item {
+        padding: 12px;
+        border-radius: 8px;
+    }
+    
+    .related-category {
+        font-size: 10px;
+        padding: 3px 8px;
+        margin-bottom: 6px;
+    }
+    
+    .related-title {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .related-votes {
+        font-size: 11px;
+    }
+    
+    .sidebar-text {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .btn-create-request {
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+    
+    .tags {
+        gap: 6px;
+    }
+    
+    .tag {
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 12px;
     }
 }
